@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/adminlte2/'); ?>bower_components/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+
 <style type="text/css">
     body{
         color: #fff;
@@ -104,11 +121,11 @@
     }   
     .signup-form form a:hover{
         text-decoration: underline;
-    }  
+    }
 </style>
 
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <?php echo form_open('users/insert'); ?>
     <h2>Register</h2>
     <p class="hint-text">Create your account. It's free and only takes a minute.</p>
         <div class="form-group">
@@ -182,3 +199,7 @@
   <div class="text-center">Already have an account? <a href="#">Sign in</a></div>
 </div>
 
+
+
+</body>
+</html>

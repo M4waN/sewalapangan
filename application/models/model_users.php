@@ -9,8 +9,17 @@ class Model_users extends CI_Model{
 
 	public function ambil_data(){
 
-		return $this->db->get('data_users');
+		return $this->db->get('datauser');
 	}
+
+	public function get_datamember(){
+
+	
+		$this->datatables->select('*');
+		$this->datatables->from('datauser');
+		return $this->datatables->generate();
+	}
+	
 	public 	function input_data($data,$table){
 		$this->db->insert($table,$data);
 	}

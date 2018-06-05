@@ -30,7 +30,7 @@
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-dashboard text-aqua"></i> <span>Dashboard</span></a></li>
         <li><a href="<?php echo base_url('admin/member'); ?>"><i class="fa fa-book"></i> <span>Data Member</span></a></li>
-        <li><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="<?php echo base_url('admin/datalapangan'); ?>"><i class="fa fa-book"></i> <span>Data Lapangan</span></a></li>
 
         <li class="treeview">
           <a href="#">

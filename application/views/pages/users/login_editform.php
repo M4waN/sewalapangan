@@ -15,7 +15,7 @@
 		<label>Password</label><br/>
 		<input type="password" name="password" value="<?php echo $u->password; ?>"><br/>
 		<label>Nama</label><br/>
-		<input type="text" name="nama" value="<?php echo $u->fullname; ?>"><br/>
+		<input type="text" name="nama" value="<?php echo $u->username; ?>"><br/>
 		<label>Email</label><br/>
 		<input type="text" name="email" value="<?php echo $u->email; ?>"><br/>
 		<select name="level">

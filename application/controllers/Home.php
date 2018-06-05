@@ -9,4 +9,9 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('templates/wrapper');
 	}
+
+	function jadwal()
+	{
+		$this->load->view('pages/jadwal');
+	}
 }

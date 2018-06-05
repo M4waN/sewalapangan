@@ -15,10 +15,10 @@ class Users extends CI_Controller {
 
 	public function login_form(){
 
-	if ($this->ion_auth->logged_in())
-	{ 
-		redirect('auth/index'); 
-	}
+	// if ($this->ion_auth->logged_in())
+	// { 
+	// 	redirect('auth/index'); 
+	// }
 
 		$this->load->view('adminlte2/global/head');
 		$this->load->view('pages/users/login_form');
@@ -38,21 +38,23 @@ class Users extends CI_Controller {
 
 	public function insert()
 	{
+
+		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('password','Password','required');
-		$this->form_validation->set_rules('nama','Nama','required');
+		// $this->form_validation->set_rules('nama','Nama','required');
 		$this->form_validation->set_rules('email','Email','required');
-		$this->form_validation->set_rules('level','Level','required');
+		// $this->form_validation->set_rules('level','Level','required');
 		
 
 		if($this->form_validation->run() != false){
 
 
 			$tgl = date("Y-m-d H:i:s");
-			
+			$fullname = $this->input->post('first_name'). " " . $this->input->post('last_name');
 			$username = $this->input->post('username');
-			$password = $this->input->post('nama');
-			$nama = $this->input->post('nama');
+			$password = $this->input->post('password');
+			
 			$email = $this->input->post('email');
 			$level = $this->input->post('level');
 			$id = md5($username. $tgl);
@@ -63,17 +65,17 @@ class Users extends CI_Controller {
 				'id_users' => $id,
 				'username' => $username,
 				'password' => md5($password),
-				'fullname' => $nama,
+				'fullname' => ucwords($fullname),
 				'email' => $email,
 				'level' => $level,
 				'created_at'=> $tgl,
 				'updated_at' => NULL
 			);
-			$this->model_users->input_data($data,'data_users');
+			$this->model_users->input_data($data,'datauser');
 			redirect('users/view');
 
 		}else{
-			$this->load->view('pages/users/login_form');
+			$this->load->view('pages/users/register_form');
 		}
 		
 	}

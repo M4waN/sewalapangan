@@ -126,7 +126,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<?php echo form_open('users/login'); ?>
+				<?php echo form_open('users/insert'); ?>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>

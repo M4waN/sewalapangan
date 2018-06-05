@@ -1,3 +1,4 @@
+<!-- <div class="col-md-12"> -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -9,7 +10,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="<?php echo base_url('assets/images/') ?>ny.jpg" alt="New York" width="1200" height="700">
+        <img src="<?php echo base_url('assets/public/images/') ?>ny.jpg" alt="New York" >
         <div class="carousel-caption">
           <h3>New York</h3>
           <p>The atmosphere in New York is lorem ipsum.</p>
@@ -17,7 +18,7 @@
       </div>
 
       <div class="item">
-        <img src="<?php echo base_url('assets/images/') ?>chicago.jpg" alt="Chicago" width="1200" height="700">
+        <img src="<?php echo base_url('assets/public/images/') ?>chicago.jpg" alt="Chicago" >
         <div class="carousel-caption">
           <h3>Chicago</h3>
           <p>Thank you, Chicago - A night we won't forget.</p>
@@ -25,7 +26,7 @@
       </div>
     
       <div class="item">
-        <img src="<?php echo base_url('assets/images/') ?>la.jpg" alt="Los Angeles" width="1200" height="700">
+        <img src="<?php echo base_url('assets/public/images/') ?>la.jpg" alt="Los Angeles" >
         <div class="carousel-caption">
           <h3>LA</h3>
           <p>Even though the traffic was a mess, we had the best time playing at Venice Beach!</p>
@@ -43,3 +44,4 @@
       <span class="sr-only">Next</span>
     </a>
 </div>
+<!-- </div> -->

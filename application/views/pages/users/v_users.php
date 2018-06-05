@@ -16,9 +16,9 @@
 		<?php $no=1; foreach($user as $u){ ?>
 		<tr>
 			<td><?php echo $no++; ?></td>
-			<td><?php echo $u->fullname ?></td>
+			<td><?php echo $u->username ?></td>
 			<td><?php echo $u->email ?></td>
-			<td><?php echo $u->level ?></td>
+			<td><?php echo $u->id_users ?></td>
 			<td><?php echo anchor('users/delete/'. $u->id_users, 'Delete'); ?>  | <?php echo anchor('users/edit/'. $u->id_users , 'Update' ); ?></td> 
 
 			<td></td>
