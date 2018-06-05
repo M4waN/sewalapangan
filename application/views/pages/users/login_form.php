@@ -1,8 +1,8 @@
 
 <style type="text/css">
-    body {
+    /* body {
 		font-family: 'Varela Round', sans-serif;
-	}
+	} */
 	.modal-login {
 		width: 350px;
 	}
@@ -61,7 +61,7 @@
 		padding-left: 5px;
 		border-radius: 0;
 	}
-    .modal-login .btn {        
+    .modal-login .btn {
         font-size: 16px;
         font-weight: bold;
 		background: #19aa8d;
@@ -96,7 +96,7 @@
 	.modal-login a {
 		color: #19aa8d;
 		text-decoration: none;
-	}	
+	}
 	.modal-login a:hover {
 		text-decoration: underline;
 	}
@@ -114,14 +114,14 @@
 <!-- form login -->
 <div class="text-center">
 	<!-- Button HTML (to Trigger Modal) -->
-	<!-- <a href="#myModal" class="trigger-btn" data-toggle="modal">Click to Open Login Modal</a> -->
+
 </div>
 
 <!-- Modal HTML -->
-<!-- <div id="myModal" class="modal fade"> -->
+<div id="loginModal" class="modal fade">
 	<div class="modal-dialog modal-login">
 		<div class="modal-content">
-			<div class="modal-header">				
+			<div class="modal-header">
 				<h4 class="modal-title">Sign In</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
@@ -145,8 +145,8 @@
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
 			</div>
-			<div class="modal-footer">Don't have an account? <a href="#">Create one</a></div>
+			<div class="modal-footer">Don't have an account? <a href="<?php echo base_url("") ?>register">Create one</a></div>
 		</div>
 	</div>
-<!-- </div>     -->
-<!-- akhir form login
+</div>
+<!-- akhir form login -->

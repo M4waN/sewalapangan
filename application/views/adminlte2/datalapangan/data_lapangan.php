@@ -1,5 +1,8 @@
 <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url('assets/adminlte2/'); ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -20,7 +23,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-          
+
 
           <div class="box">
             <div class="box-header">
@@ -28,19 +31,22 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+                <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
               <table id="mytable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Username</th>
-                  <th>Password(s)</th>
-                  <th>Nama</th>
-                  <th>Email</th>
-                  <th>Level</th>
+                  <th>No.</th>
+
+                  <th>NamaLapangan</th>
+                  <th>JenisLapangan</th>
+                  <th>TarifperJam</th>
+                  <th>Deskripsi</th>
+                  <th>Action</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                
+
                 <?php $no=1; foreach($getdata as $u){ ?>
     <tr>
       <td><?php echo $no++; ?></td>
@@ -48,21 +54,15 @@
       <td><?php echo $u->jenis_lapangan ?></td>
       <td><?php echo $u->harga_lapangan ?></td>
       <td><?php echo $u->desc_lapangan ?></td>
-      <td><?php echo anchor('users/delete/'. $u->id_lapangan, 'Delete'); ?>  | <?php echo anchor('users/edit/'. $u->id_lapangan , 'Update' ); ?></td> 
+      <td><?php echo anchor('admin/datalapangan/delete/'. $u->id_lapangan, 'Delete'); ?>  | <?php echo anchor('datalapangan/edit/'. $u->id_lapangan , 'Update' ); ?></td>
 
       <td></td>
     </tr>
     <?php } ?>
-                
+
                 </tbody>
                 <tfoot>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                </tr>
+
                 </tfoot>
               </table>
             </div>
@@ -77,18 +77,67 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <!-- Modal Add Produk-->
+    <form id="add-row-form" action="<?php echo base_url().'admin/datalapangan/insert'?>" method="post">
+       <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+  <!-- <div class="alert alert-danger">
+
+     field is wrong
+   </div> -->
+
+
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title" id="myModalLabel">Add New</h4>
+                 </div>
+                 <div class="modal-body">
+                     <div class="form-group">
+                         <input type="text" name="nama_lapangan" class="form-control" placeholder="Nama Lapangan" required>
+                     </div>
+
+                     <div class="form-group">
+                         <input type="text" name="jenis_lapangan" class="form-control" placeholder="Jenis Lapangan" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="text" name="harga_lapangan" class="form-control" placeholder="TarifperJam" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="text" name="desc_lapangan" class="form-control" placeholder="Deskripsi" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="text" name="images_lapangan" class="form-control" placeholder="Gambar" required>
+                     </div>
+
+
+
+                 </div>
+                 <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" id="add-row" class="btn btn-success">Save</button>
+                 </div>
+              </div>
+          </div>
+       </div>
+   </form>
+
 
 <!-- DataTables -->
 <script src="<?php echo base_url('assets/adminlte2/'); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url('assets/adminlte2/'); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<!-- <script src="Https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> -->
+<script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
 
 <script>
-
-
-
   $(document).ready(function() {
-  
-    // $('[data-mask]').inputmask()  
+
+    // $('[data-mask]').inputmask()
 
 //     $('#example1').DataTable( {
 //       "searching"   : false,
@@ -108,12 +157,20 @@
 //         { "data": "level" }
 //         ]
 //     } );
- $('#mytable').DataTable();
-    
+ $('#mytable').DataTable(
+   // {
+   //
+   //   dom: 'Bfrtip',
+   //   buttons: [
+   //     'copy', 'csv', 'excel', 'pdf', 'print'
+   //   ]
+   // }
+ );
+
 
 } );
 
-   
 
-   
+
+
   </script>

@@ -13,7 +13,7 @@
         </div>
       </div>
       <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
+      <!-- <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
@@ -22,7 +22,7 @@
                 </button>
               </span>
         </div>
-      </form>
+      </form> -->
       <!-- /.search form -->
 
       <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -31,6 +31,7 @@
         <li><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-dashboard text-aqua"></i> <span>Dashboard</span></a></li>
         <li><a href="<?php echo base_url('admin/member'); ?>"><i class="fa fa-book"></i> <span>Data Member</span></a></li>
         <li><a href="<?php echo base_url('admin/datalapangan'); ?>"><i class="fa fa-book"></i> <span>Data Lapangan</span></a></li>
+        <li><a href="<?php echo base_url('admin/datapemesanan'); ?>"><i class="fa fa-book"></i> <span>Data Pemesanan</span></a></li>
 
         <li class="treeview">
           <a href="#">
@@ -49,7 +50,7 @@
 
 
 
-       
+
         <li class="header">LABELS</li>
         <li><a href="https://adminlte.io/docs"><i class="fa fa-dashboard text-aqua"></i> <span>Documentation</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

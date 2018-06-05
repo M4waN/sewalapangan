@@ -63,6 +63,32 @@ class Login extends CI_Controller
   		echo "anda berhasil logout";
 	}
 
+	public function cek_login() {
+			$data = array('username' => $this->input->post('username', TRUE),
+							'password' => md5($this->input->post('password', TRUE))
+				);
+			$this->load->model('model_user'); // load model_user
+			$hasil = $this->model_user->cek_user($data);
+			if ($hasil->num_rows() == 1) {
+				foreach ($hasil->result() as $sess) {
+					$sess_data['logged_in'] = 'Sudah Loggin';
+					$sess_data['uid'] = $sess->uid;
+					$sess_data['username'] = $sess->username;
+					$sess_data['level'] = $sess->level;
+					$this->session->set_userdata($sess_data);
+				}
+				if ($this->session->userdata('level')=='admin') {
+					redirect('admin/c_admin');
+				}
+				elseif ($this->session->userdata('level')=='member') {
+					redirect('member/c_member');
+				}
+			}
+			else {
+				echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";
+			}
+		}
+
 
 	// 	//we check if they are logged in, generally this would be done in the constructor, but we want to allow customers to log out still
 	// 	//or still be able to either retrieve their password or anything else this controller may be extended to do
@@ -74,13 +100,13 @@ class Login extends CI_Controller
 	// 	}
 
 
-	// 	//buat validasi input form login //validasi username wajib diisi dan bersih dari cross site scripting 
+	// 	//buat validasi input form login //validasi username wajib diisi dan bersih dari cross site scripting
 	// 	$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-	// 	// $this->form_validation->set_rules('username', 'Username', 'required'); 
-	// 	//validasi password wajib diisi 
+	// 	// $this->form_validation->set_rules('username', 'Username', 'required');
+	// 	//validasi password wajib diisi
 	// 	$this->form_validation->set_rules('password', 'Password', 'required');
-		
-		
+
+
 	// 	$this->load->helper('form');
 	// 	$data['redirect']	= $this->session->flashdata('redirect');
 	// 	$submitted 			= $this->input->post('submitted');
@@ -105,7 +131,7 @@ class Login extends CI_Controller
 	// 		// 	}
 	// 		// }
 
-	// 		if (!$this->ion_auth->logged_in()) 
+	// 		if (!$this->ion_auth->logged_in())
 	// 		{
 	// 			$data         = array('content' => 'home/formlogin',
 	// 			'title'       =>'Login Page',
@@ -114,11 +140,11 @@ class Login extends CI_Controller
 	// 		}
 	// 		else
 	// 		{
-	// 			if ($this->ion_auth->in_group('admin')) 
+	// 			if ($this->ion_auth->in_group('admin'))
 	// 				{
 	// 					redirect('admin','refresh');
 	// 				}
-	// 			elseif ($this->ion_auth->in_group('members')) 
+	// 			elseif ($this->ion_auth->in_group('members'))
 	// 				{
 	// 					redirect('members','refresh');
 	// 				}
@@ -129,8 +155,8 @@ class Login extends CI_Controller
 	// 		}
 
 	// 		// if ($login)
-	// 		// {	
-				
+	// 		// {
+
 	// 		// 	if ($redirect == '')
 	// 		// 	{
 	// 		// 		$this->session->set_flashdata('message', 'Enter Text');
@@ -149,13 +175,13 @@ class Login extends CI_Controller
 
 	// 	// }
 	// 	// $this->load->view('login/login', $data);
-		
+
 	// }
 
 	// function logout()
 	// {
 	// 	$this->ion_auth->logout();
-		
+
 	// 	//when someone logs out, automatically redirect them to the login page.
 	// 	$this->session->set_flashdata('message', "logged Out successfully");
 	// 	redirect('login');

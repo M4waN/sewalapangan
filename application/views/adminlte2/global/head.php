@@ -22,7 +22,7 @@
 
 <!-- javascript -->
   <script src="<?php echo base_url('assets/adminlte2/'); ?>bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="<?php echo base_url().'/assets/assets/js/jquery-2.1.4.min.js'?>"></script>
+  <!-- <script src="<?php echo base_url().'/assets/assets/js/jquery-2.1.4.min.js'?>"></script> -->
 
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url('assets/adminlte2/'); ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -44,10 +44,10 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-  
-  
-  
-  
+
+
+
+
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/adminlte2/'); ?>dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -56,10 +56,10 @@
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
+  <!-- [if lt IE 9]> -->
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <!-- <![endif] -->
 
   <!-- Google Font -->
   <link rel="stylesheet"
