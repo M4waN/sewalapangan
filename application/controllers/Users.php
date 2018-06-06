@@ -80,7 +80,7 @@ class Users extends CI_Controller {
 				'last_name' => ucwords($lastname),
 				'email' => $email,
 				'alamat' => $alamat,
-				'phone' => $phone,
+				'no_telp' => $phone,
 				// 'images_biodata' => $images_biodata,
 				'created_at'=> $tgl,
 				'updated_at' => NULL
@@ -113,7 +113,7 @@ class Users extends CI_Controller {
 
 
 
-	
+
 
 	public function update()
 	{

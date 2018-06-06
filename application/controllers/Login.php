@@ -12,179 +12,71 @@ class Login extends CI_Controller
 	{
 		parent::__construct();
 		// $this->load->database();
-		$this->load->library(array('ion_auth', 'form_validation', 'session'));
-		$this->load->helper(array('url', 'language'));
-
-		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-
-		$this->lang->load('auth');
+		$this->load->library(array('form_validation', 'session'));
+		$this->load->helper('url');
+		$this->load->model(array('login_model'));
 	}
 
-	function index()
+	function admin_login()
 	{
-
-		if ($this->input->post()) {
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('email', 'Email', 'required');
-			$this->form_validation->set_rules('remember', 'Remember me', 'integer');
-			if ($this->form_validation->run()==TRUE) {
-				$remember = (bool) $this->input->post('remember');
-				if ($this->ion_auth->login($this->input->post('email'),$this->input->post('password'),$remember)) {
-					// redirect('admin','refresh');
-					echo "anda admin";
-				}else{
-					$this->session->flashdata('message',$this->ion_auth->errors());
-					redirect('login','refresh');
-				}
-			}
-		}
-		if (!$this->ion_auth->logged_in()) {
-			$data = array('content' => 'home/formlogin',
-				'title'=>'Login Page',
-				'description'=>'Login page');
-			$this->load->view('login/login',$data);
-			echo "belum_logout";
-
-			$this->session->flashdata('message',$this->ion_auth->errors());
-		}else{
-            if ($this->ion_auth->in_group('admin')) {
-                // redirect('admin','refresh');
-                echo "anda admin";
-            }elseif ($this->ion_auth->in_group('members')) {
-            	redirect('admin/members','refresh');
-            }else{
-				redirect('login','refresh');
-			}
-        }
-	}
-	public function logout(){
-		$this->ion_auth->logout();
-  		// redirect('login', 'refresh');
-  		echo "anda berhasil logout";
+		$this->load->view('login/admin_login');
 	}
 
-	public function cek_login() {
-			$data = array('username' => $this->input->post('username', TRUE),
-							'password' => md5($this->input->post('password', TRUE))
+	function auth_login_member()
+	{
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+			$where = array(
+				'username' => $username,
+				'password' => md5($password)
 				);
-			$this->load->model('model_user'); // load model_user
-			$hasil = $this->model_user->cek_user($data);
-			if ($hasil->num_rows() == 1) {
-				foreach ($hasil->result() as $sess) {
-					$sess_data['logged_in'] = 'Sudah Loggin';
-					$sess_data['uid'] = $sess->uid;
-					$sess_data['username'] = $sess->username;
-					$sess_data['level'] = $sess->level;
-					$this->session->set_userdata($sess_data);
-				}
-				if ($this->session->userdata('level')=='admin') {
-					redirect('admin/c_admin');
-				}
-				elseif ($this->session->userdata('level')=='member') {
-					redirect('member/c_member');
-				}
+			$cek = $this->login_model->auth_member("data_member",$where)->num_rows();
+			if($cek > 0){
+
+				$data_session = array(
+					'nama' => $username,
+					'status' => "login_member"
+					);
+
+				$this->session->set_userdata($data_session);
+
+				redirect(base_url());
+			}else{
+				$this->sesison->set_flashdata('error-msg','Login gagal! Username dan password salah !!!');
+				redirect(base_url('#modalLogin'));
 			}
-			else {
-				echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";
+	}
+
+	function auth_login_user()
+	{
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+			$where = array(
+				'username' => $username,
+				'password' => md5($password)
+				);
+			$cek = $this->login_model->auth_user("user",$where)->num_rows();
+			if($cek > 0){
+
+				$data_session = array(
+					'nama' => $username,
+					'status' => "login_user"
+					);
+
+				$this->session->set_userdata($data_session);
+
+				redirect(base_url('admin'));
+			}else{
+				$this->session->set_flashdata('error-msg','Login gagal! Username dan password salah !!!');
+				redirect(base_url('login/admin_login'));
 			}
-		}
+	}
+
+	function logout(){
+$this->session->sess_destroy();
+redirect(base_url('login'));
+}
 
 
-	// 	//we check if they are logged in, generally this would be done in the constructor, but we want to allow customers to log out still
-	// 	//or still be able to either retrieve their password or anything else this controller may be extended to do
-	// 	$redirect	= $this->ion_auth->logged_in(false, false);
-	// 	//if they are logged in, we send them back to the dashboard by default, if they are not logging in
-	// 	if ($redirect)
-	// 	{
-	// 		redirect('admin/dashboard');
-	// 	}
-
-
-	// 	//buat validasi input form login //validasi username wajib diisi dan bersih dari cross site scripting
-	// 	$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-	// 	// $this->form_validation->set_rules('username', 'Username', 'required');
-	// 	//validasi password wajib diisi
-	// 	$this->form_validation->set_rules('password', 'Password', 'required');
-
-
-	// 	$this->load->helper('form');
-	// 	$data['redirect']	= $this->session->flashdata('redirect');
-	// 	$submitted 			= $this->input->post('submitted');
-
-	// 	// if ($submitted)
-	// 	// {
-	// 	// 	$username	= $this->input->post('email');
-	// 	// 	// $username	= $this->input->post('username');
-	// 	// 	$password	= $this->input->post('password');
-	// 	// 	$password_encrypt = md5($password);
-	// 	// 	$remember   = $this->input->post('remember');
-	// 	// 	$redirect	= $this->input->post('redirect');
-	// 		// $login		= $this->ion_auth->login_admin($email, $password, $remember);
-
-	// 		// if ($this->form_validation->run()==TRUE) {
-	// 		// 	$remember = (bool) $this->input->post('remember');
-	// 		// 	if ($this->ion_auth->login($this->input->post('email'),$this->input->post('password'),$remember)) {
-	// 		// 		redirect('admin','refresh');
-	// 		// 	}else{
-	// 		// 		$this->session->flashdata('message',$this->ion_auth->errors());
-	// 		// 		redirect('login','refresh');
-	// 		// 	}
-	// 		// }
-
-	// 		if (!$this->ion_auth->logged_in())
-	// 		{
-	// 			$data         = array('content' => 'home/formlogin',
-	// 			'title'       =>'Login Page',
-	// 			'description' =>'Login page');
-	// 			$this->load->view('login/login',$data);
-	// 		}
-	// 		else
-	// 		{
-	// 			if ($this->ion_auth->in_group('admin'))
-	// 				{
-	// 					redirect('admin','refresh');
-	// 				}
-	// 			elseif ($this->ion_auth->in_group('members'))
-	// 				{
-	// 					redirect('members','refresh');
-	// 				}
-	// 			else
-	// 				{
-	// 					redirect('sds', 'refresh');
-	// 				}
-	// 		}
-
-	// 		// if ($login)
-	// 		// {
-
-	// 		// 	if ($redirect == '')
-	// 		// 	{
-	// 		// 		$this->session->set_flashdata('message', 'Enter Text');
-	// 		// 		$redirect = 'admin/dashboard';
-	// 		// 	}
-	// 		// 	redirect($redirect);
-	// 		// }
-	// 		// else
-	// 		// {
-	// 		// 	//this adds the redirect back to flash data if they provide an incorrect credentials
-	// 		// 	$this->session->set_flashdata('redirect', $redirect);
-	// 		// 	$this->session->set_flashdata('error', 'Authentication Failed');
-	// 		// 	redirect('login');
-	// 		// }
-
-
-	// 	// }
-	// 	// $this->load->view('login/login', $data);
-
-	// }
-
-	// function logout()
-	// {
-	// 	$this->ion_auth->logout();
-
-	// 	//when someone logs out, automatically redirect them to the login page.
-	// 	$this->session->set_flashdata('message', "logged Out successfully");
-	// 	redirect('login');
-	// }
 
 }
