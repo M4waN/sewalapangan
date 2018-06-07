@@ -117,16 +117,22 @@
 
 </div>
 
+<center>
 <!-- Modal HTML -->
 <div id="loginModal" class="modal fade">
 	<div class="modal-dialog modal-login">
 		<div class="modal-content">
 			<div class="modal-header">
+				<?php if($this->session->flashdata('error-msg') == TRUE) : ?>
+			  <div class="alert alert-danger" role="alert">
+			    <?php echo $this->session->flashdata('error-msg') ?>
+			  </div>
+			<?php endif; ?>
 				<h4 class="modal-title">Sign In</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<?php echo form_open('users/insert'); ?>
+				<?php echo form_open('auth/auth_login_member'); ?>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -150,3 +156,4 @@
 	</div>
 </div>
 <!-- akhir form login -->
+</center>

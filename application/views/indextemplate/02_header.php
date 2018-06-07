@@ -32,7 +32,7 @@
       <ul class="main-nav nav navbar-nav navbar-right">
         <li><a href="<?php echo base_url(''); ?>#home">Home</a></li>
         <li><a href="<?php echo base_url(''); ?>#about">About</a></li>
-        <li><a href="<?php echo base_url(''); ?>#portfolio">Portfolio</a></li>
+        <li><a href="<?php echo base_url(''); ?>#fasilitas">Lapangan dan Fasilitas</a></li>
         <li class="has-dropdown"><a href="#contact">Contact</a>
           <ul class="dropdown">
             <li><a href="https://api.whatsapp.com/send?phone=6282311468821" target="_blank" rel="unfollow"><i class="fa fa-whatsapp" ></i> +62 823 1146 8821</a></li>

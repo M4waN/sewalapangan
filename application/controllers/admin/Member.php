@@ -7,9 +7,13 @@ class Member extends CI_Controller {
 	{
 		parent::__construct();
 		// $this->load->model('Members_model');
-		 $this->load->library('datatables');
+		 $this->load->library(array('datatables', 'session'));
 		$this->load->model('model_users');
 			$this->load->library('form_validation');
+			if ($this->session->userdata('status') != 'login_user')
+			{
+				redirect(base_url('auth/admin_login'));
+	  	}
 
 	}
 

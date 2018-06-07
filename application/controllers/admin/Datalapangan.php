@@ -6,8 +6,13 @@ class Datalapangan extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->load->model('model_lapangan');
-		$this->load->library('form_validation');
+		$this->load->library(array('form_validation', 'session'));
+		if ($this->session->userdata('status') != 'login_user')
+		{
+			redirect(base_url('auth/admin_login'));
+  	}
 
 	}
 

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $route['(:any)'] = 'pages/view';
 $route['admin/data-member'] = 'admin/member';
 $route['register'] = 'users/register_form';
-$route['login'] = 'users/login_form';
+$route['auth/logout'] = 'login/logout_admin';
 $route['admin'] = 'admin/dashboard';
 $route['default_controller'] = 'home';
 

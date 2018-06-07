@@ -7,7 +7,11 @@ class Datapemesanan extends CI_Controller {
 	{
 		parent::__construct();
     $this->load->model('Pemesanan_model');
-    $this->load->library('datatables');
+    $this->load->library(array('datatables', 'session'));
+		if ($this->session->userdata('status') != 'login_user')
+		{
+			redirect(base_url('login/admin_login'));
+  	}
 
 	}
 

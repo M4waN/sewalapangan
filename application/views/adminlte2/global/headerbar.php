@@ -29,14 +29,14 @@
                 </p>
               </li>
               <!-- Menu Body -->
-            
+
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url();?>auth/logout_admin" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

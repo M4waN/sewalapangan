@@ -104,7 +104,7 @@ font-size: 12px;
 <?php endif; ?>
 
 					<h1>Login to Your Account</h1><br>
-				  <?php echo form_open('login/auth_login_user'); ?>
+				  <?php echo form_open('auth/auth_login_user'); ?>
 					<input type="text" name="username" placeholder="Username">
 					<input type="password" name="password" placeholder="Password">
 					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
