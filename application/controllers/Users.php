@@ -8,7 +8,7 @@ class Users extends CI_Controller {
 			$this->load->model('model_users');
 			$this->load->helper('url');
 			// $this->load->helper ('form');
-			$this->load->library(array('form_validation'));
+			$this->load->library(array('form_validation', 'session'));
 		}
 
 

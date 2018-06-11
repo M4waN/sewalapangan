@@ -32,6 +32,7 @@
         <li><a href="<?php echo base_url('admin/member'); ?>"><i class="fa fa-book"></i> <span>Data Member</span></a></li>
         <li><a href="<?php echo base_url('admin/datalapangan'); ?>"><i class="fa fa-book"></i> <span>Data Lapangan</span></a></li>
         <li><a href="<?php echo base_url('admin/datapemesanan'); ?>"><i class="fa fa-book"></i> <span>Data Pemesanan</span></a></li>
+        <li><a href="<?php echo base_url('admin/datalaporan'); ?>"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
 
         <!-- <li class="treeview">
           <a href="#">

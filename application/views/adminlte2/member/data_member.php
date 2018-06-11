@@ -68,7 +68,7 @@
 
             data-toggle="modal" data-target="#hapus-data">
             <button  data-toggle="modal" data-target="#delete-data" class="btn btn-info btn-danger">Hapus</button>
-              </a>  |
+              </a>
               <a    href="javascript:;"
                     data-id_member="<?php echo $u->id_member ?>"
                     data-username="<?php echo $u->username ?>"
