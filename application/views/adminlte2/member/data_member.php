@@ -48,6 +48,7 @@
                   <th>No. Telp</th>
                   <th>Alamat</th>
                   <th>Username</th>
+                  <th>Alamat</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -82,8 +83,9 @@
                     data-toggle="modal" data-target="#edit-data">
                     <button  data-toggle="modal" data-target="#ubah-data" class="btn btn-info">Ubah</button>
                       </a>
+      </td>
 
-      <td></td>
+      <!-- <td>Act</td> -->
     </tr>
     <?php } ?>
 
