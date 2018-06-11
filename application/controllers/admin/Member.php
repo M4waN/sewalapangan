@@ -7,8 +7,8 @@ class Member extends CI_Controller {
 	{
 		parent::__construct();
 		// $this->load->model('Members_model');
-		 $this->load->library(array('datatables', 'session'));
-		$this->load->model('model_users');
+		 	$this->load->library(array('datatables', 'session'));
+			$this->load->model('members_model');
 			$this->load->library('form_validation');
 			if ($this->session->userdata('status') != 'login_user')
 			{
@@ -23,7 +23,7 @@ class Member extends CI_Controller {
 			'active_controller' => 'member',
 			'active_function' => 'data_member',
 			'data' => [
-				'getdata' => $this->model_users->ambil_data()->result(),
+				'getdata' => $this->members_model->ambil_data()->result(),
 				'pagename' => 'Data Member'
 			]
 		];
@@ -63,8 +63,8 @@ class Member extends CI_Controller {
 			$email = $this->input->post('email');
 			$alamat = $this->input->post('alamat');
 			$phone = $this->input->post('phone');
-			$id_biodata = md5($username. $tgl);
-			$id = md5($id_biodata. $tgl);
+			$id_member = md5($username. $tgl);
+			// $id = md5($id_biodata. $tgl);
 
 			// $username = $this->input->post('username');
 			// $password = $this->input->post('password');
@@ -73,64 +73,66 @@ class Member extends CI_Controller {
 
 
 			$data = array(
-				'id_biodata' => $id_biodata,
-				'first_name' => ucwords($first_name),
-				'last_name' => ucwords($lastname),
+				'id_member' => $id_member,
+				'firstname' => ucwords($first_name),
+				'lastname' => ucwords($lastname),
 				'email' => $email,
 				'alamat' => $alamat,
-				'phone' => $phone,
+				'no_telp' => $phone,
+				'username' => $username,
+				'password' => md5($password),
+				// 'level' => 'member',
 				// 'images_biodata' => $images_biodata,
 				'created_at'=> $tgl,
 				'updated_at' => NULL
 			);
+		 //
+			// $datauser = array(
+			// 	'id_users' => $id,
+			// 	'id_biodata' => $id_biodata,
+			// 	'username' => $username,
+			// 	'password' => md5($password),
+			// 	'level' => 'member',
+			// 	'created_at'=> $tgl,
+			// 	'updated_at' => NULL
+		 //
+		 // );
 
-			$datauser = array(
-				'id_users' => $id,
-				'id_biodata' => $id_biodata,
-				'username' => $username,
-				'password' => md5($password),
-				'level' => 'member',
-				'created_at'=> $tgl,
-				'updated_at' => NULL
-
-		 );
-
-			$this->model_users->input_data($data,'biodata_users');
-			$this->model_users->input_data($datauser,'user');
+			$this->members_model->input_data($data,'data_member');
+			// $this->model_users->input_data($datauser,'user');
+		 $this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 			redirect('admin/member');
 
 		}else{
-			$data = [
-			// 'data' => [
-				'msg' => 'error-msg'
-			// ]
-
-			];
+			 $this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert">Maaf Data gagal ditambahkan !!! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 			redirect('member', $data);
 			// $this->load->view('pages/users/register_form');
 		}
 
 	}
-	public function delete($id_users){
-		$where = array('id_users' => $id_users);
-		$this->model_users->delete($where, 'user');
+	public function delete($id_member){
+		$id_member = $this->input->post('id_member');
+		if($id_member == ""){
+          $this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert"> Maaf Data gagal dihapus!!!  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+            redirect('admin/member');
+    }else{
+
+
+		$where = array('id_member' => $id_member);
+		$this->members_model->delete($where, 'data_member');
+		$this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert"> Data Berhasil dihapuskan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 		redirect('admin/member');
+		}
 	}
 
-	public function edit($id_users){
-		$where = array('id_users' => $id_users);
-		$data['user'] = $this->model_users->edit($where, 'user')->result();
-		$this->load->view('pages/users/login_editform', $data);
-
-	}
 
 	public function update()
 	{
-		$this->form_validation->set_rules('first_name','First_name', 'required');
-		$this->form_validation->set_rules('last_name','Last_name', 'required');
+		$this->form_validation->set_rules('firstname','Firstname', 'required');
+		$this->form_validation->set_rules('lastname','Lastname', 'required');
 		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('password','Password','required');
-		$this->form_validation->set_rules('phone','Phone','required');
+		$this->form_validation->set_rules('no_telp','No_telp','required');
 		$this->form_validation->set_rules('email','Email','required');
 		$this->form_validation->set_rules('alamat','alamat','required');
 
@@ -143,62 +145,44 @@ class Member extends CI_Controller {
 			$password = $this->input->post('password');
 			// $level = $this->input->post('level');
 
-			$first_name = $this->input->post('first_name');
-			$lastname =  $this->input->post('last_name');
+			$first_name = $this->input->post('firstname');
+			$last_name =  $this->input->post('lastname');
 			$email = $this->input->post('email');
 			$alamat = $this->input->post('alamat');
-			$phone = $this->input->post('phone');
-			$id_biodata = $this->input->post('id');
+			$phone = $this->input->post('no_telp');
+			$id = $this->input->post('id_member');
 			// $id = md5($id_biodata. $tgl);
 
 
 
 			$data = array(
-				'id_biodata' => $id_biodata,
-				'first_name' => ucwords($first_name),
-				'last_name' => ucwords($lastname),
+				// 'id_member' => $id,
+				'username' => $username,
+				'password' => md5($password),
+				'firstname' => ucwords($first_name),
+				'lastname' => ucwords($last_name),
 				'email' => $email,
 				'alamat' => $alamat,
-				'phone' => $phone,
+				'no_telp' => $phone,
 				// 'images_biodata' => $images_biodata,
-				'created_at'=> $tgl,
-				'updated_at' => NULL
-			);
-
-			$datauser = array(
-				// 'id_users' => $id,
-				// 'id_biodata' => $id_biodata,
-				'username' => $username,
-				'password' => md5($password),
-				'level' => 'member',
-				// 'created_at'=> $tgl,
-				'updated_at' => $tgl,
-
-		 );
-			$data = array(
-
-				'username' => $username,
-				'password' => md5($password),
-				'fullname' => $nama,
-				'email' => $email,
-				'level' => $level,
+				'created_at'=> NULL,
 				'updated_at' => $tgl
 			);
+
+
 			$where = array(
-				'id_users' => $id
-
-			);
-			$whereuser = array(
-				'id_users' => $id
+				'id_member' => $id
 
 			);
 
-			$this->model_users->update($where, $data,'data_users');
 
-			redirect('users/view');
+			$this->members_model->update($where, $data,'data_member');
+			$this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert"> Data Berhasil diubah <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+			redirect('admin/member');
 
 		}else{
-			$this->load->view('pages/users/login_editform');
+			$this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert"> Maaf data gagal ditambahkan !!! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+		redirect('admin/member');
 
 		}
 

@@ -8,7 +8,7 @@
           <img src="<?php echo base_url('assets/adminlte2/'); ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?php echo $this->session->userdata('nama') ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -33,29 +33,25 @@
         <li><a href="<?php echo base_url('admin/datalapangan'); ?>"><i class="fa fa-book"></i> <span>Data Lapangan</span></a></li>
         <li><a href="<?php echo base_url('admin/datapemesanan'); ?>"><i class="fa fa-book"></i> <span>Data Pemesanan</span></a></li>
 
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Forms</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+          <!-- <ul class="treeview-menu">
             <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
             <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
             <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
+          </ul> -->
+        </li> -->
 
 
 
 
 
-        <li class="header">LABELS</li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-dashboard text-aqua"></i> <span>Documentation</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+
       </ul>
     </section>
     <!-- /.sidebar -->

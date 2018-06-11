@@ -34,8 +34,26 @@ class Auth extends CI_Controller
 		// if($this->session->userdata('status') != 'login_user'){
 		// 	redirect(base_url('#loginModal'));
 		// }
+		$query = $this->db->get('users');
+
+  if($query->num_rows() > 0){
+    $row = $query->row();
+    $data = array(
+        'user_id' 		=> $row->id,
+        'user_avatar' 	=> $row->avatar,
+        'user_name' 	=> $row->username,
+        'full_name' 	=> $row->fullname,
+        'logged_in'  	=> TRUE,
+        );
+    $this->session->set_userdata($data);
+    return true;
+  }else{
+    return false;
+  }
+
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
+
 			$where = array(
 				'username' => $username,
 				'password' => md5($password)
@@ -65,15 +83,20 @@ class Auth extends CI_Controller
 
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
+
 			$where = array(
 				'username' => $username,
 				'password' => md5($password)
 				);
-			$cek = $this->login_model->auth_user("user",$where)->num_rows();
+
+			$cek = $this->login_model->auth_user("data_user",$where)->num_rows();
 			if($cek > 0){
+				$row = $this->login_model->auth_user("data_user", $where)->row();
 
 				$data_session = array(
-					'nama' => $username,
+					'nama' => ucwords($row->first_name ." " . $row->last_name),
+					'level' => ucwords($row->level),
+
 					'status' => "login_user"
 					);
 

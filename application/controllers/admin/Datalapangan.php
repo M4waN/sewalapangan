@@ -8,7 +8,7 @@ class Datalapangan extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('model_lapangan');
-		$this->load->library(array('form_validation', 'session'));
+		$this->load->library(array('form_validation', 'session','HelpTool'));
 		if ($this->session->userdata('status') != 'login_user')
 		{
 			redirect(base_url('auth/admin_login'));
@@ -101,19 +101,15 @@ class Datalapangan extends CI_Controller {
 			// 	'updated_at' => NULL
 		 //
 		 // );
-
+		  $this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 			$this->model_lapangan->input_data($data, 'data_lapangan');
 			// $this->model_users->input_data($datauser,'user');
-			redirect('admin/member');
+
+			redirect('admin/datalapangan');
 
 		}else{
-			$data = [
-			// 'data' => [
-				'msg' => 'error-msg'
-			// ]
-
-			];
-			redirect('admin/datalapangan', $data);
+			 $this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert"> Maaf data gagal ditambahkan !!! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+			redirect('admin/datalapangan');
 			// $this->load->view('pages/users/register_form');
 		}
 
@@ -128,10 +124,65 @@ class Datalapangan extends CI_Controller {
 	// 	$this->datatables->from('data_users');
 	// 	return print_r($this->datatables->generate());
 	// }
-	public function delete($id_lapangan){
+	public function delete()
+	{
+		$id_lapangan = $this->input->post('id_lapangan');
+		if($id_lapangan == ""){
+          $this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert"> Maaf Data gagal dihapus!!!  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+            redirect('admin/datalapangan');
+    }else{
 		$where = array('id_lapangan' => $id_lapangan);
 		$this->model_lapangan->delete($where, 'data_lapangan');
+		$this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert"> Data Berhasil dihapuskan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 		redirect('admin/datalapangan');
+		}
+	}
+
+	function update()
+	{
+		$this->form_validation->set_rules('nama_lapangan','Nama_lapangan', 'required');
+		$this->form_validation->set_rules('jenis_lapangan','Jenis_lapangan', 'required');
+		$this->form_validation->set_rules('harga_lapangan','harga_lapangan','required');
+		$this->form_validation->set_rules('desc_lapangan','Desc_lapangan','required');
+
+		if($this->form_validation->run() != false){
+
+
+			$tgl = date("Y-m-d H:i:s");
+
+
+			$id = $this->input->post('id_lapangan');
+			$nama_lapangan = $this->input->post('nama_lapangan');
+			$jenis_lapangan =  $this->input->post('jenis_lapangan');
+			$harga_lapangan = $this->input->post('harga_lapangan');
+			$desc_lapangan = $this->input->post('desc_lapangan');
+			// $id = md5($nama_lapangan. $tgl);
+
+				$data = array(
+				// 'id_lapangan' => $id,
+				'nama_lapangan' => ucwords($nama_lapangan),
+				'jenis_lapangan' => ucwords($jenis_lapangan),
+				'harga_lapangan' => $harga_lapangan,
+				'desc_lapangan' => $desc_lapangan,
+				// 'phone' => $phone,
+				'images_lapangan' => NULL,
+				'created_at'=> NULL,
+				'updated_at' => $tgl
+			);
+
+			$where = array('id_lapangan' => $id);
+
+			$this->model_lapangan->update($where, $data, 'data_lapangan');
+			// $this->model_users->input_data($datauser,'user');
+			$this->session->set_flashdata('notif', '<div class="alert alert-success" role="alert"> Data Berhasil diubah <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+			  // $this->session->set_flashdata('sukses'," Data Berhasil diubah");
+			redirect('admin/datalapangan');
+
+		}else{
+				$this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert"> Maaf data gagal diubah !!! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+			redirect('admin/datalapangan');
+			// $this->load->view('pages/users/register_form');
+		}
 	}
 
 

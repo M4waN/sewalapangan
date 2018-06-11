@@ -8,11 +8,12 @@ class Pemesanan_model extends CI_Model{
 
 
 	public function getData(){
-    $this->db->select('data_booking. *, data_users. *, data_lapangan. *, groups.name');
+    $this->db->select('data_booking. *, data_member.*, data_lapangan.*');
 		$this->db->from('data_booking');
     $this->db->join('data_lapangan', 'data_lapangan.id_lapangan = data_booking.id_lapangan');
-    $this->db->join('data_users', 'data_users.id_users = data_booking.id_users');
-    $this->db->join('groups', 'groups.id = data_users.id_groups  ');
+    $this->db->join('data_member', 'data_member.id_member = data_booking.id_member');
+		// return $this->db->get('data_booking')->result();
+    // $this->db->join('groups', 'groups.id = data_users.id_groups  ');
     // $this->datatables->add_column('view', '<a href="world/edit/$1">edit</a> | <a href="world/delete/$1">delete</a>', 'id_booking');
     // return $this->datatables->generate();
     $data = $this->db->get()->result();
