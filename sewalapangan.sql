@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 Jun 2018 pada 08.18
+-- Generation Time: 20 Jun 2018 pada 19.28
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.5
 
@@ -53,9 +53,8 @@ INSERT INTO `data_booking` (`id_booking`, `id_member`, `id_lapangan`, `waktu_mul
 CREATE TABLE `data_lapangan` (
   `id_lapangan` varchar(50) NOT NULL,
   `nama_lapangan` varchar(50) NOT NULL,
-  `jenis_lapangan` varchar(50) NOT NULL,
+  `id_jenis_lapangan` varchar(50) NOT NULL,
   `harga_lapangan` int(10) NOT NULL,
-  `desc_lapangan` mediumtext NOT NULL,
   `images_lapangan` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -65,9 +64,10 @@ CREATE TABLE `data_lapangan` (
 -- Dumping data untuk tabel `data_lapangan`
 --
 
-INSERT INTO `data_lapangan` (`id_lapangan`, `nama_lapangan`, `jenis_lapangan`, `harga_lapangan`, `desc_lapangan`, `images_lapangan`, `created_at`, `updated_at`) VALUES
-('c6a083216eac49861e889a937e023405', 'Lapangan B', 'FUTSAL OUTDOOR RUMPUT', 50000, 'Ini lapangan futsal outdoor rumput', NULL, '2018-06-07 14:36:15', '2018-06-07 14:36:15'),
-('d1b6cc2b0fdbdeb65ae01c3e8b582fc3', 'Lapangan A', 'FUTSAL OUTDOOR MATRAS', 150000, 'Ini lapangan futsal indor', NULL, '2018-06-07 22:05:42', '2018-06-07 22:05:42');
+INSERT INTO `data_lapangan` (`id_lapangan`, `nama_lapangan`, `id_jenis_lapangan`, `harga_lapangan`, `images_lapangan`, `created_at`, `updated_at`) VALUES
+('525ed6dc3cf8cfda5bda62a7de70694c', 'Lapangan C OUTDOOR RUMPUT', '', 234777, NULL, '2018-06-20 12:26:21', '2018-06-14 04:11:42'),
+('c6a083216eac49861e889a937e023405', 'Lapangan B  INDOOR RUMPUT', 'e4esrd35454d', 50000, NULL, '2018-06-20 12:26:21', '2018-06-07 14:36:15'),
+('d1b6cc2b0fdbdeb65ae01c3e8b582fc3', 'Lapangan A INDOOR SINTETIS', 'e4esrd35454d', 150000, NULL, '2018-06-20 12:26:21', '2018-06-07 22:05:42');
 
 -- --------------------------------------------------------
 
@@ -106,12 +106,10 @@ INSERT INTO `data_member` (`id_member`, `username`, `password`, `firstname`, `la
 CREATE TABLE `data_transaksi` (
   `id_transaksi` varchar(50) NOT NULL,
   `id_booking` varchar(50) NOT NULL,
-  `tarif_jam` int(100) NOT NULL,
   `total_terbayar` int(100) NOT NULL,
   `total_tarif` int(100) NOT NULL,
   `status` varchar(20) NOT NULL,
-  `tgl_transaksi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `tgl_kadaluarsa` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `tgl_transaksi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -153,22 +151,17 @@ CREATE TABLE `events` (
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `color` varchar(7) NOT NULL DEFAULT '#3a87ad',
-  `date` datetime NOT NULL
+  `start` datetime NOT NULL,
+  `end` datetime DEFAULT NULL,
+  `allDay` varchar(50) NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `description`, `color`, `date`) VALUES
-(1, 'Event 1', 'This is events description', '#f00877', '2014-10-05 02:44:00'),
-(2, 'Event 2', 'This is events description', '#08aaf0', '2014-10-08 02:44:00'),
-(3, 'Event 3', 'This is events description', '#08f049', '2014-10-22 02:45:00'),
-(4, 'Event 4', 'This is events description', '#ddf008', '2014-10-31 02:45:00'),
-(23, 'sfsd', 'sfsdfs', '#3a87ad', '2018-06-04 07:00:00'),
-(24, 'besok', 'klop', '#ff001f', '2018-06-07 00:18:00'),
-(25, 'besok', 'klop', '#ff001f', '2018-06-07 00:18:00'),
-(26, 'jj', 'kkk', '#3a87ad', '2018-06-06 00:19:00');
+INSERT INTO `events` (`id`, `title`, `description`, `color`, `start`, `end`, `allDay`) VALUES
+(234234, 'test', 'sflskfjl', '#3a87ad', '2018-06-18 17:00:00', '2018-06-18 18:00:00', 'false');
 
 -- --------------------------------------------------------
 
@@ -189,6 +182,26 @@ CREATE TABLE `groups` (
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
 (2, 'members', 'General User');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenis_lapangan`
+--
+
+CREATE TABLE `jenis_lapangan` (
+  `id_jenis_lapangan` varchar(50) NOT NULL,
+  `nama_jenis_lapangan` varchar(100) NOT NULL,
+  `desc_jenis_lapangan` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `jenis_lapangan`
+--
+
+INSERT INTO `jenis_lapangan` (`id_jenis_lapangan`, `nama_jenis_lapangan`, `desc_jenis_lapangan`, `created_at`) VALUES
+('e4esrd35454d', 'FUTSAL', 'FUTSAL', '2018-06-20 12:24:15');
 
 -- --------------------------------------------------------
 
@@ -330,6 +343,12 @@ ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `jenis_lapangan`
+--
+ALTER TABLE `jenis_lapangan`
+  ADD PRIMARY KEY (`id_jenis_lapangan`);
+
+--
 -- Indexes for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
@@ -371,7 +390,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234235;
 --
 -- AUTO_INCREMENT for table `groups`
 --

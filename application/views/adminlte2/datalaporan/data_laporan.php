@@ -37,7 +37,7 @@
 
             <div class="box-header">
 
-              <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+              <!-- <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button> -->
             </div>
             <!-- /.box-header -->
 
@@ -47,31 +47,45 @@
                 <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Username</th>
-                  <th>Nama Penyewa</th>
-                  <th>Email</th>
-                  <th>Lapangan</th>
-                  <th>Jenis Lapangan</th>
+                  <th>ID Transaksi</th>
+                  <th>Kode Booking</th>
+                  <th>ID Member</th>
                   <th>Durasi Sewa</th>
-                  <th>Waktu Sewa Mulai</th>
-                  <th>Waktu Sewa Berakhir</th>
+                  <th>Tanggal Sewa</th>
+                  <th>Waktu Sewa</th>
+                  <th>Tarif perJam</th>
+
+                  <th>Total Tarif</th>
+                  <th>Sudah dibayar</th>
+                  <th>Sisa Pembayaran</th>
+
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <?php $no=1; foreach($getdata as $u){ ?>
+                <?php $no=1; foreach($getdata as $u){
+                  $tgl_mulai = explode(" ", $u->waktu_mulai);
+                  $tgl_selesai = explode(" ", $u->waktu_selesai);
+
+
+                   ?>
     <tr>
       <td><?php echo $no++; ?></td>
-      <td><?php echo $u->username ?></td>
-      <td><?php echo $u->firstname . " " . $u->lastname; ?></td>
-      <td><?php echo $u->email; ?></td>
-      <td><?php echo $u->nama_lapangan ?></td>
-      <td><?php echo $u->jenis_lapangan ?></td>
-      <td><?php echo $u->duration_time; ?></td>
-      <td><?php echo $u->waktu_mulai; ?></td>
-      <td><?php echo $u->waktu_selesai; ?></td>
+      <td><?php echo $u->id_transaksi ?></td>
+      <td><?php echo $u->id_booking ?></td>
+      <td><?php echo $u->id_member ?></td>
+      <td><?php echo $u->duration_time ?></td>
+      <td><?php echo $tgl_mulai[0] ?></td>
+      <td><?php echo $tgl_mulai[1] ." - ". $tgl_selesai[1] ?></td>
+      <td><?php echo $u->harga_lapangan ?></td>
+      <td><?php echo $u->total_tarif ?></td>
+      <td><?php echo $u->total_terbayar; ?></td>
+      <td><?php
+      $sisa_bayar = $u->total_tarif - $u->total_terbayar;
+      echo $sisa_bayar; ?>
+    </td>
       <td><?php echo $u->status; ?></td>
       <td>  <a    href="javascript:;"
             data-id_lapangan="<?php echo $u->id_booking ?>"
@@ -80,7 +94,7 @@
             <button  data-toggle="modal" data-target="#delete-data" class="btn btn-info btn-danger">Hapus</button>
               </a>
               <a    href="javascript:;"
-                    data-id_lapangan="<?php echo $u->id_booking ?>"
+                    data-id_lapangan="<?php echo $u->id_transaksi ?>"
                     data-nama_lapangan="<?php echo $u->username?>"
                     data-nama_lapangan="<?php echo $u->firstname ?>"
                     data-jenis_lapangan="<?php echo $u->lastname ?>"

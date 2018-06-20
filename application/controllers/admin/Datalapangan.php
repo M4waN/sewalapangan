@@ -38,12 +38,30 @@ class Datalapangan extends CI_Controller {
 			// 'getdata' => $this->model_lapangan->ambil_data()->result(),
 			'data' => [
 				'getdata' => $this->model_lapangan->ambil_data()->result(),
+				'getdata_jenislapangan' => $this->model_lapangan->getid_jenislapangan()->result(),
 				'pagename' => 'Data Lapangan'
 			]
 		];
 // $this->load->view('adminlte2/datalapangan/data_lapangan', $data);
 		$this->load->view('adminlte2/global/template', $data);
 	}
+
+	public function jenis_lapangan()
+	{
+
+		$data = [
+			'active_controller' => 'datalapangan',
+			'active_function' => 'jenis_lapangan',
+			// 'getdata' => $this->model_lapangan->ambil_data()->result(),
+			'data' => [
+				'getdata' => $this->model_lapangan->getid_jenislapangan()->result(),
+				'pagename' => 'Data Jenis Lapangan'
+			]
+		];
+// $this->load->view('adminlte2/datalapangan/data_lapangan', $data);
+		$this->load->view('adminlte2/global/template', $data);
+	}
+
 
 	public function insert()
 	{
@@ -81,9 +99,8 @@ class Datalapangan extends CI_Controller {
 			$data = array(
 				'id_lapangan' => $id,
 				'nama_lapangan' => ucwords($nama_lapangan),
-				'jenis_lapangan' => ucwords($jenis_lapangan),
+				'id_jenis_lapangan' => ucwords($jenis_lapangan),
 				'harga_lapangan' => $harga_lapangan,
-				'desc_lapangan' => $desc_lapangan,
 				// 'phone' => $phone,
 				'images_lapangan' => NULL,
 				'created_at'=> $tgl,
@@ -184,6 +201,8 @@ class Datalapangan extends CI_Controller {
 			// $this->load->view('pages/users/register_form');
 		}
 	}
+
+
 
 
 }

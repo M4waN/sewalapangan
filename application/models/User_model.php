@@ -1,6 +1,6 @@
 <?php
 
-class Model_users extends CI_Model{
+class User_model extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 
@@ -20,7 +20,7 @@ class Model_users extends CI_Model{
 
 
 		$this->datatables->select('*');
-		$this->datatables->from('biodata_users');
+		$this->datatables->from('data_user');
 		return $this->datatables->generate();
 	}
 

@@ -8,8 +8,20 @@ class Model_lapangan extends CI_Model{
 
 
 	public function ambil_data(){
-
-		return $this->db->get('data_lapangan');
+		$this->db->select('data_lapangan. *, jenis_lapangan.*');
+		$this->db->from('data_lapangan');
+		$this->db->join('jenis_lapangan', 'jenis_lapangan.id_jenis_lapangan = data_lapangan.id_jenis_lapangan', 'left');
+		// return $this->db->get('data_booking')->result();
+		// $this->db->join('groups', 'groups.id = data_users.id_groups  ');
+		// $this->datatables->add_column('view', '<a href="world/edit/$1">edit</a> | <a href="world/delete/$1">delete</a>', 'id_booking');
+		// return $this->datatables->generate();
+		$data = $this->db->get();
+		return $data;
+		// return $this->db->get('data_lapangan');
+	}
+	public function getid_jenislapangan()
+	{
+			return $this->db->get('jenis_lapangan');
 	}
 
 

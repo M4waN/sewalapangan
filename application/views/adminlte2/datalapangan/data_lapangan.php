@@ -64,9 +64,9 @@
     <tr>
       <td><?php echo $no++; ?></td>
       <td><?php echo $u->nama_lapangan ?></td>
-      <td><?php echo $u->jenis_lapangan ?></td>
+      <td><?php echo $u->nama_jenis_lapangan ?></td>
       <td align="right  "><?php echo $this->helptool->rupiah($u->harga_lapangan) ?></td>
-      <td><?php echo $u->desc_lapangan ?></td>
+      <td><?php echo $u->desc_jenis_lapangan ?></td>
       <td>
         <a    href="javascript:;"
             data-id_lapangan="<?php echo $u->id_lapangan ?>"
@@ -77,9 +77,8 @@
 <a    href="javascript:;"
       data-id_lapangan="<?php echo $u->id_lapangan ?>"
       data-nama_lapangan="<?php echo $u->nama_lapangan ?>"
-      data-jenis_lapangan="<?php echo $u->jenis_lapangan ?>"
+      data-jenis_lapangan="<?php echo $u->id_jenis_lapangan ?>"
       data-harga_lapangan="<?php echo $u->harga_lapangan ?>"
-      data-desc_lapangan="<?php echo $u->desc_lapangan ?>"
 
       data-toggle="modal" data-target="#edit-data">
       <button  data-toggle="modal" data-target="#ubah-data" class="btn btn-info">Ubah</button>
@@ -129,14 +128,32 @@
                      </div>
 
                      <div class="form-group">
-                         <input type="text" name="jenis_lapangan" class="form-control" placeholder="Jenis Lapangan" required>
+
+
+
+                         <!-- combo box -->
+
+                <select name="jenis_lapangan" id="jenis_lapangan" class="form-control" onchange="getJenis(this.value)" required>
+								<option>--Pilih Jenis Lapangan--</option>
+								<?php
+								if($getdata_jenislapangan != null):
+								foreach($getdata_jenislapangan as $row):
+								?>
+								<option value="<?php echo $row->id_jenis_lapangan;?>"><?php echo $row->nama_jenis_lapangan;?></option>
+								<?php
+								endforeach;
+								endif;
+								?>
+							</select>
+
+
                      </div>
                      <div class="form-group">
                          <input type="text" name="harga_lapangan" class="form-control" placeholder="TarifperJam" required>
                      </div>
-                     <div class="form-group">
+                     <!-- <div class="form-group">
                          <input type="text" name="desc_lapangan" class="form-control" placeholder="Deskripsi" required>
-                     </div>
+                     </div> -->
                      <div class="form-group">
                          <input type="text" name="images_lapangan" class="form-control" placeholder="Gambar" required>
                      </div>
@@ -173,7 +190,19 @@
                         <div class="form-group">
                              <label class="col-lg-2 col-sm-2 control-label">Jenis Lapangan</label>
                              <div class="col-lg-10">
-                                 <input class="form-control" id="jenis_lapangan" name="jenis_lapangan" placeholder="Tuliskan Deskripsi">
+                                 <input class="form-control" id="idjenis_lapangan" name="idjenis_lapangan" placeholder="Tuliskan Deskripsi">
+                                 <select name="jenis_lapangan" id="jenis_lapangan" class="form-control" onchange="getJenis(this.value)" required>
+                                <option>--Pilih Jenis Lapangan--</option>
+                                <?php
+                                if($getdata_jenislapangan != null):
+                                foreach($getdata_jenislapangan as $row):
+                                ?>
+                                <option  value="<?php echo $row->id_jenis_lapangan;?>"><?php echo $row->nama_jenis_lapangan;?></option>
+                                <?php
+                                endforeach;
+                                endif;
+                                ?>
+                              </select>
                              </div>
                          </div>
    	                    <div class="form-group">
@@ -253,7 +282,7 @@
             modal.find('#id_lapangan').attr("value",div.data('id_lapangan'));
             modal.find('#nama_lapangan').attr("value",div.data('nama_lapangan'));
             modal.find('#desc_lapangan').html(div.data('desc_lapangan'));
-            modal.find('#jenis_lapangan').attr("value",div.data('jenis_lapangan'));
+            modal.find('#idjenis_lapangan').attr("value",div.data('jenis_lapangan'));
             modal.find('#harga_lapangan').attr("value",div.data('harga_lapangan'));
             // modal.find('#harga_lapangan').attr("value",div.data('harga_lapangan'));
         });
@@ -307,6 +336,3 @@
 
 
   </script>
-
-
-  

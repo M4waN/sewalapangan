@@ -55,10 +55,20 @@
           <!-- </div> -->
           <!-- /. box -->
 <!-- <br>
-</div> --> 
+</div> -->
+
+<script>
+function hitung() {
+    var durasi = $(".durasi").val();
+    var time = $(".time").val();
+
+    c = durasi + <?php echo strtotime(time) ?> //a kali b
+    $(".c").val(c);
+}
+</script>
 
 <!-- ModalForm -->
-<div class="modal fade">
+<div id="crud-jadwal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -75,9 +85,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="time">Time</label>
+                                <label class="col-md-4 control-label" for="time">Tanggal Sewa</label>
                                 <div class="col-md-4 input-append bootstrap-timepicker">
-                                    <input id="time" name="time" type="text" class="form-control input-md" />
+                                    <input id="date" name="date" type="text" class="form-control input-md" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="time">Jam Mulai</label>
+                                <div class="col-md-4 input-append bootstrap-timepicker">
+                                    <input id="time" name="time" type="text" class="form-control input-md" disabled />
                                 </div>
                             </div>
                             <div class="form-group">

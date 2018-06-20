@@ -5,7 +5,7 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 			parent::__construct();
-			$this->load->model('model_users');
+			$this->load->model('Members_model');
 			$this->load->library(array('ion_auth', 'form_validation', 'session'));
 			$this->load->helper(array('url', 'language'));
 		}

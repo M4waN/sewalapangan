@@ -35,8 +35,8 @@ class Calendar extends CI_Controller {
         'title' => 'test',
         'description' => 'tests',
         // 'color' => '#F2F2F2',
-        'start' => $u->jam_mulai ,
-        'end' => $u->jam_selesai
+        'start' => $u->waktu_mulai ,
+        'end' => $u->waktu_selesai
        );
     }
 		echo json_encode($data);

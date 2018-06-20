@@ -6,11 +6,11 @@ class Datalaporan extends CI_Controller {
  public function __construct()
  {
    parent::__construct();
-   $this->load->model('Pemesanan_model');
+   $this->load->model('Laporan_model');
    $this->load->library(array('datatables', 'session'));
    if ($this->session->userdata('status') != 'login_user')
    {
-     redirect(base_url('login/admin_login'));
+     redirect(base_url('auth/admin_login'));
    }
 
  }
@@ -21,8 +21,8 @@ class Datalaporan extends CI_Controller {
      'active_controller' => 'datalaporan',
      'active_function' => 'data_laporan',
      'data' => [
-       'getdata' => $this->Pemesanan_model->getData(),
-       'pagename' => 'Data Pemesanan'
+       'getdata' => $this->Laporan_model->getData(),
+       'pagename' => 'Laporan'
      ]
 
    ];

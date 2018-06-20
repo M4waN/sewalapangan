@@ -37,7 +37,7 @@
 
             <div class="box-header">
 
-              <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+              <!-- <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button> -->
             </div>
             <!-- /.box-header -->
 
@@ -47,8 +47,8 @@
                 <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Username</th>
                   <th>Nama Penyewa</th>
+                  <th>Username</th>
                   <th>Email</th>
                   <th>Lapangan</th>
                   <th>Jenis Lapangan</th>
@@ -64,11 +64,11 @@
                 <?php $no=1; foreach($getdata as $u){ ?>
     <tr>
       <td><?php echo $no++; ?></td>
-      <td><?php echo $u->username ?></td>
       <td><?php echo $u->firstname . " " . $u->lastname; ?></td>
+      <td><?php echo $u->username ?></td>
       <td><?php echo $u->email; ?></td>
       <td><?php echo $u->nama_lapangan ?></td>
-      <td><?php echo $u->jenis_lapangan ?></td>
+      <td><?php echo $u->nama_jenis_lapangan ?></td>
       <td><?php echo $u->duration_time; ?></td>
       <td><?php echo $u->waktu_mulai; ?></td>
       <td><?php echo $u->waktu_selesai; ?></td>
@@ -85,7 +85,7 @@
                     data-nama_lapangan="<?php echo $u->firstname ?>"
                     data-jenis_lapangan="<?php echo $u->lastname ?>"
                     data-harga_lapangan="<?php echo $u->nama_lapangan ?>"
-                    data-harga_lapangan="<?php echo $u->jenis_lapangan ?>"
+                    data-harga_lapangan="<?php echo $u->id_jenis_lapangan ?>"
                     data-harga_lapangan="<?php echo $u->duration_time ?>"
                     data-harga_lapangan="<?php echo $u->waktu_mulai ?>"
                     data-harga_lapangan="<?php echo $u->status ?>"
@@ -137,9 +137,7 @@
                          <input type="text" name="nama_lapangan" class="form-control" placeholder="Nama Lapangan" required>
                      </div>
 
-                     <div class="form-group">
-                         <input type="text" name="jenis_lapangan" class="form-control" placeholder="Jenis Lapangan" required>
-                     </div>
+
                      <div class="form-group">
                          <input type="text" name="harga_lapangan" class="form-control" placeholder="TarifperJam" required>
                      </div>

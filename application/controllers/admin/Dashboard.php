@@ -23,4 +23,18 @@ class Dashboard extends CI_Controller {
 		$this->load->view('adminlte2/global/template', $data);
 
 	}
+	function changeprofil()
+	{
+		$data = [
+			'active_controller' => 'dashboard',
+			'active_function' => 'change_profil',
+			// 'getdata' => $this->model_lapangan->ambil_data()->result(),
+			'data' => [
+				'getdata' => $this->model_lapangan->ambil_data()->result(),
+				'pagename' => 'Data Lapangan'
+			]
+		];
+// $this->load->view('adminlte2/datalapangan/data_lapangan', $data);
+		$this->load->view('adminlte2/global/template', $data);
+	}
 }

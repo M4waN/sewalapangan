@@ -10,7 +10,7 @@ class Datapemesanan extends CI_Controller {
     $this->load->library(array('datatables', 'session'));
 		if ($this->session->userdata('status') != 'login_user')
 		{
-			redirect(base_url('login/admin_login'));
+			redirect(base_url('auth/admin_login'));
   	}
 
 	}

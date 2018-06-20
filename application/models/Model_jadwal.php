@@ -15,7 +15,7 @@ class Model_jadwal extends CI_Model{
   // }
   function getEvents()
   {
-    $sql = "SELECT * FROM data_booking WHERE data_booking.jam_mulai BETWEEN ? AND ? ORDER BY data_booking.jam_mulai ASC";
+    $sql = "SELECT * FROM data_booking WHERE data_booking.waktu_mulai BETWEEN ? AND ? ORDER BY data_booking.waktu_mulai ASC";
 	return $this->db->query($sql, array($_GET['start'], $_GET['end']))->result();
 
   }
