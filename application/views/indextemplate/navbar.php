@@ -25,16 +25,39 @@
 
       <!--  Main navigation  -->
       <ul class="main-nav nav navbar-nav navbar-right">
-        <li><a href="<?php echo base_url(''); ?>index.php#home">Home</a></li>
-        <li><a href="<?php echo base_url(''); ?>index.php#about">About</a></li>
-        <li><a href="<?php echo base_url(''); ?>index.php#portfolio">Portfolio</a></li>
-        <li class="has-dropdown"><a href="index.php#contact">Contact</a>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#fitur">Lapangan dan Fasilitas</a></li>
+        <!-- <li><a href="#service">Services</a></li> -->
+        <!-- <li><a href="#pricing">Prices</a></li> -->
+        <!-- <li><a href="#team">Team</a></li> -->
+        <li class="has-dropdown"><a href="#blog">Blog</a>
           <ul class="dropdown">
-            <li><a href="https://api.whatsapp.com/send?phone=6282311468821" target="_blank" rel="unfollow"><i class="fa fa-whatsapp" ></i> +62 823 1146 8821</a></li>
+            <li><a href="blog-single.html">blog post</a></li>
           </ul>
         </li>
+        <li><a href="#contact">Contact</a></li>
+        <li><?php if($this->session->userdata('status') === 'login_member'): ?>
+          <a href="<?php echo base_url('calendar'); ?>">Jadwal dan Pesan</a>
+        <?php else: ?>
+          <a    href="javascript:;"
+                data-redirect_url="calendar"
+                data-toggle="modal" data-target="#loginModal">
+              Jadwal dan Pesan
+                  </a>
+        <?php  endif;  ?>
+        </li>
+        <?php if($this->session->userdata('status') === 'login_member'): ?>
 
+        <li class="has-dropdown"><a href="#">Hi ! <?php echo $this->session->userdata('nama') ?></a>
+          <ul class="dropdown">
+            <li><a href="<?php echo base_url(''); ?>"><i class="fa fa-user"></i> Dashboard</a></li>
+            <li><a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off" ></i> Logout </a></li>
+          </ul>
+        </li>
+      <?php else: ?>
         <a href="#loginModal"  data-toggle="modal"><button type="button" class="btn navbar-btn">Login/Register</button></a>
+      <?php endif; ?>
       </ul>
       <!-- /Main navigation -->
 

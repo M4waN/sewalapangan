@@ -5,7 +5,7 @@ class Users extends CI_Controller {
 
 	public function __construct(){
 			parent::__construct();
-			$this->load->model('model_users');
+			$this->load->model('Members_model');
 			$this->load->helper('url');
 			// $this->load->helper ('form');
 			$this->load->library(array('form_validation', 'session'));
@@ -72,34 +72,25 @@ class Users extends CI_Controller {
 			// $password = $this->input->post('password');
 			// $level = $this->input->post('level');
 
-
-
-			$data = array(
-				'id_biodata' => $id_biodata,
-				'first_name' => ucwords($first_name),
-				'last_name' => ucwords($lastname),
-				'email' => $email,
-				'alamat' => $alamat,
-				'no_telp' => $phone,
-				// 'images_biodata' => $images_biodata,
-				'created_at'=> $tgl,
-				'updated_at' => NULL
-			);
-
-			$datauser = array(
-				'id_users' => $id,
-				'id_biodata' => $id_biodata,
-				'username' => $username,
-				'password' => md5($password),
-				'level' => 'member',
-				'created_at'=> $tgl,
-				'updated_at' => NULL
-
+		 $data = array(
+			 'id_member' => $id,
+			 'firstname' => ucwords($first_name),
+			 'lastname' => ucwords($lastname),
+			 'email' => $email,
+			 'alamat' => $alamat,
+			 'no_telp' => $phone,
+			 'username' => $username,
+			 'password' => md5($password),
+			 // 'level' => 'member',
+			 // 'images_biodata' => $images_biodata,
+			 'created_at'=> $tgl,
+			 'updated_at' => NULL
 		 );
 
-			$this->model_users->input_data($data,'biodata_users');
-			$this->model_users->input_data($datauser,'user');
-			redirect('index.php');
+			// $this->Members_model->input_data($data,'biodata_users');
+			$this->Members_model->input_data($data,'data_member');
+			$this->session->set_flashdata('success', 'success');
+			redirect('register');
 
 		}else{
 			$this->load->view('pages/users/register_form');
@@ -107,7 +98,7 @@ class Users extends CI_Controller {
 
 	}
 	public function view(){
-		$data['user'] = $this->model_users->ambil_data()->result();
+		$data['user'] = $this->Members_model->ambil_data()->result();
 		$this->load->view('pages/users/v_users.php',$data);
 	}
 
@@ -153,7 +144,7 @@ class Users extends CI_Controller {
 
 			);
 
-			$this->model_users->update($where, $data,'data_users');
+			$this->Members_model->update($where, $data,'data_users');
 
 			redirect('users/view');
 

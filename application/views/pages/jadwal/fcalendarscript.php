@@ -39,38 +39,67 @@
 
 
     $('#calendar').fullCalendar({
-    	defaultView: 'agendaWeek',
+    	defaultView: 'agendaDay',
        nowIndicator: true,
-      aspectRatio: 1.5,
+      aspectRatio: 1.7,
+        scrollTime: '00:00',
 
-		views: {
-		timelineFourDays: {
-		type: 'timeline',
-		duration: {
-    		minTime: "06:00:00",
-    		maxTime: "12:00:00"
-    	}
-		}
-		},
+		// views: {
+		// timelineFourDays: {
+		// type: 'timeline',
+		// duration: {
+    // 		minTime: "06:00:00",
+    // 		maxTime: "12:00:00"
+    // 	}
+		// }
+		// },
 
 
       header    : {
         left  : 'prev,next today',
         center: 'title',
-        right : 'agendaWeek,agendaDay'
+        right : 'month,agendaWeek, agendaDay'
       },
-      buttonText: {
-        today: 'today',
-
-        week : 'week',
-        day  : 'day'
-      },
+      // buttonText: {
+      //   today: 'today',
+      //
+      //
+      //   week : 'week',
+      //   day  : 'day'
+      // },
       //Random default events
 
       eventLimit: true,
-      events: base_url+'calendar/getEvents',
+      // events: base_url+'calendar/getEvents',
+      resourceAreaWidth: '40%',
+      resourceColumns: [
+        {
+          group: true,
+          labelText: 'Building',
+          field: 'building'
+        },
+        {
+          labelText: 'Room',
+          field: 'title'
+        },
+        {
+          labelText: 'Occupancy',
+          field: 'occupancy'
+        }
+      ],
+
+      events: [
+        { id: '1', resourceId: 'b', start: '2018-04-07T02:00:00', end: '2018-04-07T07:00:00', title: 'event 1' },
+        { id: '2', resourceId: 'c', start: '2018-04-07T05:00:00', end: '2018-04-07T22:00:00', title: 'event 2' },
+        { id: '3', resourceId: 'd', start: '2018-04-06', end: '2018-04-08', title: 'event 3' },
+        { id: '4', resourceId: 'e', start: '2018-04-07T03:00:00', end: '2018-04-07T08:00:00', title: 'event 4' },
+        { id: '5', resourceId: 'f', start: '2018-04-07T00:30:00', end: '2018-04-07T02:30:00', title: 'event 5' }
+      ],
       selectable: true,
       selecthelper:true,
+
+
+
       // select: function(start, end, allDay) {
       //   var title = prompt("Enter event title");
       //   if(title){

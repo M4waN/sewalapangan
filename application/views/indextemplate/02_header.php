@@ -1,4 +1,5 @@
 <!-- Header -->
+
 <header id="home">
   <!-- Background Image -->
   <div class="bg-img" style="background-image: url('<?php echo base_url('assets/index/'); ?>img/sportcenter.jpg');">
@@ -36,15 +37,24 @@
 
         </li>
 
-        <li class="has-dropdown"><a href="#contact">Contact</a>
-          <ul class="dropdown">
+        <li><a href="#contact">Contact</a>
+          <!-- <ul class="dropdown">
             <li><a href="https://api.whatsapp.com/send?phone=6282311468821" target="_blank" rel="unfollow"><i class="fa fa-whatsapp" ></i> +62 823 1146 8821</a>
             </li>
+          </ul> -->
+        </li>
+        <li><a href="<?php echo base_url('calendar') ?>">Jadwal dan pesan</a></li>
+        <?php if($this->session->userdata('status') === 'login_member'): ?>
+
+        <li class="has-dropdown"><a href="#">Hi ! <?php echo $this->session->userdata('nama') ?></a>
+          <ul class="dropdown">
+            <li><a href="<?php echo base_url(''); ?>"><i class="fa fa-user"></i> Profile</a></li>
+            <li><a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off" ></i> Logout </a></li>
           </ul>
         </li>
-
-        <a href="#loginModal" data-toggle="modal" ><button type="button" class="btn navbar-btn">Login/Register</button></a>
-
+      <?php else: ?>
+        <a href="#loginModal"  data-toggle="modal"><button type="button" class="btn navbar-btn">Login/Register</button></a>
+      <?php endif; ?>
       </ul>
       <!-- /Main navigation -->
 
@@ -63,7 +73,7 @@
             <h1 class="white-text">SPORTCENTER</h1>
             <p class="white-text">Morbi mattis felis at nunc. Duis viverra diam non justo. In nisl. Nullam sit amet magna in magna gravida vehicula. Mauris tincidunt sem sed arcu. Nunc posuere.
             </p>
-            <a href="<?php echo base_url('home/jadwal'); ?>" class="white-btn">Pesan Sekarang!</a>
+            <a href="<?php echo base_url('calendar'); ?>" class="white-btn">Pesan Sekarang!</a>
             <!-- <button class="main-btn">Learn more</button> -->
           </div>
         </div>
@@ -75,4 +85,6 @@
   <!-- /home wrapper -->
 
 </header>
+
+
 <!-- /Header -->

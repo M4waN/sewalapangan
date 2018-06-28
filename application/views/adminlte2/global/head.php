@@ -24,6 +24,12 @@
   <script src="<?php echo base_url('assets/adminlte2/'); ?>bower_components/jquery/dist/jquery.min.js"></script>
   <!-- <script src="<?php echo base_url().'/assets/assets/js/jquery-2.1.4.min.js'?>"></script> -->
 
+
+          <link href='<?php echo base_url('assets/fullcalendar/'); ?>css/scheduler.min.css' rel='stylesheet' />
+          <!-- <link href='<?php echo base_url('assets/fullcalendar/'); ?>css/scheduler.css' rel='stylesheet' /> -->
+        <script src='<?php echo base_url('assets/fullcalendar/'); ?>js/scheduler.min.js'></script>
+        <!-- <script src='<?php echo base_url('assets/fullcalendar/'); ?>js/scheduler.js'></script> -->
+
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url('assets/adminlte2/'); ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->

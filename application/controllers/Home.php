@@ -12,7 +12,18 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('indextemplate/wrap');
+		// $this->load->view('indextemplate/wrap');
+		$this->load->view('index/head');
+		$this->load->view('index/header');
+
+		$this->load->view('index/about');
+		$this->load->view('index/fitur');
+		$this->load->view('index/blog');
+		$this->load->view('index/contact');
+		$this->load->view('index/footer');
+
+		$this->load->view('index/foot');
+		$this->load->view('pages/users/login_form');
 
 	}
 

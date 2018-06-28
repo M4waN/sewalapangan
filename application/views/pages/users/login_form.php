@@ -1,3 +1,30 @@
+<!-- <script type="text/javascript">
+
+$(document).ready(function(){
+		$("button").click(function(){
+				var username = $("#username").val().trim();
+				var password = $("#password").val().trim();
+
+				if( username != "" && password != "" ){
+						$.ajax({
+								url:'checkUser.php',
+								type:'post',
+								data:{username:username,password:password},
+								success:function(response){
+										var msg = "";
+										if(response == 1){
+												window.location = "home.php";
+										}else{
+												msg = "Invalid username and password!";
+										}
+										$("#message").html(msg);
+								}
+						});
+				}
+		});
+});
+
+</script> -->
 
 <style type="text/css">
     /* body {
@@ -117,9 +144,11 @@
 
 </div>
 
+
+
 <center>
 <!-- Modal HTML -->
-<div id="loginModal" class="modal fade">
+<div role="dialog" tabindex="-1" id="loginModal" class="modal fade">
 	<div class="modal-dialog modal-login">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -136,17 +165,18 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
-							<input type="text" class="form-control" name="username" placeholder="Username" required="required">
+							<input type="hidden" id="redirect_url" name="redirect_url">
+							<input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-							<input type="text" class="form-control" name="password" placeholder="Password" required="required">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
 						</div>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+						<button id="but_submit" name="but_submit" type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
 					</div>
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
@@ -157,3 +187,16 @@
 </div>
 <!-- akhir form login -->
 </center>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+		$('#loginModal').on('show.bs.modal', function (event) {
+		var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+		var modal          = $(this)
+
+		// Isi nilai pada field
+		modal.find('#redirect_url').attr("value",div.data('redirect_url'));
+		});
+});
+</script>

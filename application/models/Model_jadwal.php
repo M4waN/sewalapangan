@@ -20,6 +20,11 @@ class Model_jadwal extends CI_Model{
 
   }
 
+	function getResources()
+	{
+
+	}
+
   /*Create new events */
 
   	Public function addEvent()
