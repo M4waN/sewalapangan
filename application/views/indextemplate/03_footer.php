@@ -1,4 +1,5 @@
 <!-- Footer -->
+
 <footer id="footer" class="sm-padding bg-dark">
 
   <!-- Container -->
@@ -40,7 +41,7 @@
   </div>
   <!-- /Container -->
 
-  
+
 
 
 </footer>

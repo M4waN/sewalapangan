@@ -6,12 +6,24 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/adminlte2/'); ?>bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <!-- fullCalendar -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/adminlte2/'); ?>bower_components/fullcalendar/dist/fullcalendar.min.css">
-  <link rel="stylesheet" href="<?php echo base_url('assets/adminlte2/'); ?>bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+
   <!-- Theme style -->
   <link href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css" rel="stylesheet" />
 	<link href="<?php echo base_url('assets/fullcalendar/'); ?>css/bootstrap-colorpicker.min.css" rel="stylesheet" />
+
         <link href="<?php echo base_url('assets/fullcalendar/'); ?>css/bootstrap-timepicker.min.css" rel="stylesheet" />
+
+
+        <link href='<?php echo base_url('assets/fullcalendar'); ?>/lib/fullcalendar.min.css' rel='stylesheet' />
+        <link href='<?php echo base_url('assets/fullcalendar'); ?>/lib/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+        <link href='<?php echo base_url('assets/fullcalendar'); ?>/css/scheduler.min.css' rel='stylesheet' />
+        <script src='<?php echo base_url('assets/fullcalendar'); ?>/lib/moment.min.js'></script>
+
+        <script src='<?php echo base_url('assets/fullcalendar'); ?>/lib/fullcalendar.min.js'></script>
+        <script src='<?php echo base_url('assets/fullcalendar'); ?>/js/scheduler.min.js'></script>
+
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -22,11 +34,16 @@
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-<style media="screen">
 
-	#calendar {
+<!-- <script src="<?php echo base_url('assets/') ?>fullcalendar/lib/fcalendarwscheduler.js"></script> -->
+
+<style media="screen">
+#calendar {
+  max-width: 900px;
+  margin: 50px auto;
+
                 width: 60vw;
-                margin: 0 auto;
+                /* margin: 0 auto; */
 								border: 5px solid rgba(0,0,0,.5);
 								border-radius: 10px;
 
@@ -44,6 +61,15 @@
           </div>
       </div>
 
+      <link rel="stylesheet" href="<?php echo base_url('assets/fullcalendar/'); ?>lib/fullcalendar.min.css">
+      <link rel="stylesheet" href="<?php echo base_url('assets/fullcalendar/'); ?>lib/fullcalendar.print.min.css" media="print">
+
+
+              <link href='<?php echo base_url('assets/fullcalendar/'); ?>css/scheduler.min.css' rel='stylesheet' />
+              <!-- <link href='<?php echo base_url('assets/fullcalendar/'); ?>css/scheduler.css' rel='stylesheet' /> -->
+            <script src='<?php echo base_url('assets/fullcalendar/'); ?>js/scheduler.min.js'></script>
+            <!-- <script src='<?php echo base_url('assets/fullcalendar/'); ?>js/scheduler.js'></script> -->
+
 <!-- <div class="container">
 
           <div class="box box-primary" style="background-color: #FFF; ">
@@ -57,7 +83,7 @@
 <!-- <br>
 </div> -->
 
-<script>
+<!-- <script>
 function hitung() {
     var durasi = $(".durasi").val();
     var time = $(".time").val();
@@ -65,7 +91,7 @@ function hitung() {
     c = durasi + <?php echo strtotime(time) ?> //a kali b
     $(".c").val(c);
 }
-</script>
+</script> -->
 
 <!-- ModalForm -->
 <div id="crud-jadwal" class="modal fade">

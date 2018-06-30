@@ -15,10 +15,24 @@ class Model_jadwal extends CI_Model{
   // }
   function getEvents()
   {
-    $sql = "SELECT * FROM data_booking WHERE data_booking.waktu_mulai BETWEEN ? AND ? ORDER BY data_booking.waktu_mulai ASC";
-	return $this->db->query($sql, array($_GET['start'], $_GET['end']))->result();
+  //   $sql = "SELECT * FROM data_booking WHERE data_booking.waktu_mulai BETWEEN ? AND ? ORDER BY data_booking.waktu_mulai ASC";
+	// return $this->db->query($sql, array($_GET['start'], $_GET['end']))->result();
+	$this->db->select('data_booking. *, data_member.*, data_lapangan.* , jenis_lapangan.*');
+	$this->db->from('data_booking');
+	$this->db->join('data_lapangan', 'data_lapangan.id_lapangan = data_booking.id_lapangan');
+	$this->db->join('jenis_lapangan', 'jenis_lapangan.id_jenis_lapangan = data_lapangan.id_jenis_lapangan');
+	$this->db->join('data_member', 'data_member.id_member = data_booking.id_member');
+	$this->db->where('status', 'lunas');
+	$this->db->or_where('status', 'barudp');
+	$data = $this->db->get()->result();
+	return $data;
 
   }
+
+	function getResources()
+	{
+
+	}
 
   /*Create new events */
 

@@ -1,4 +1,12 @@
 
+
+<?php
+$data=$this->session->flashdata('success');
+if ($data!=""): ?>
+
+Oke sdh registrasi
+
+<?php else: ?>
   <!-- Container -->
   <div class="container">
 
@@ -88,3 +96,4 @@
   </div>
   <!-- /Container -->
 </div>
+<?php endif; ?>

@@ -74,13 +74,13 @@
       <td><?php echo $u->waktu_selesai; ?></td>
       <td><?php echo $u->status; ?></td>
       <td>  <a    href="javascript:;"
-            data-id_lapangan="<?php echo $u->id_booking ?>"
+            data-id_booking="<?php echo $u->id_booking ?>"
 
             data-toggle="modal" data-target="#hapus-data">
-            <button  data-toggle="modal" data-target="#delete-data" class="btn btn-info btn-danger">Hapus</button>
+          Hapus
               </a>
               <a    href="javascript:;"
-                    data-id_lapangan="<?php echo $u->id_booking ?>"
+                    data-id_booking="<?php echo $u->id_booking ?>"
                     data-nama_lapangan="<?php echo $u->username?>"
                     data-nama_lapangan="<?php echo $u->firstname ?>"
                     data-jenis_lapangan="<?php echo $u->lastname ?>"
@@ -215,7 +215,7 @@
    <!-- END Modal Ubah -->
 
    <!-- Modal Hapus Produk-->
-  <form class="form-horizontal" action="<?php echo base_url('admin/datalapangan/delete')?>" method="post" enctype="multipart/form-data" role="form">
+  <form class="form-horizontal" action="<?php echo base_url('admin/Datapemesanan/delete')?>" method="post" enctype="multipart/form-data" role="form">
        <div class="modal fade" id="hapus-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
              <div class="modal-content">
@@ -224,7 +224,7 @@
                      <h4 class="modal-title" id="myModalLabel">Hapus Produk</h4>
                  </div>
                  <div class="modal-body">
-                        	<input type="hidden" id="id_lapangan" name="id_lapangan">
+                        	<input type="text" id="id_booking" name="id_booking">
                          <strong>Anda yakin mau menghapus record ini?</strong>
                  </div>
                  <div class="modal-footer">
@@ -265,7 +265,7 @@
             var modal          = $(this)
 
             // Isi nilai pada field
-            modal.find('#id_lapangan').attr("value",div.data('id_lapangan'));
+            modal.find('#id_booking').attr("value",div.data('id_booking'));
         });
     });
 </script>
