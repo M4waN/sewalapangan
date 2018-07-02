@@ -51,6 +51,10 @@ class Auth extends CI_Controller
   //   return false;
   // }
 
+			// $redirect_url = 'member/profile';
+
+
+
 			$redirect_url = $this->input->post('redirect_url');
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
@@ -64,14 +68,27 @@ class Auth extends CI_Controller
 				$row = $this->login_model->auth_member("data_member", $where)->row();
 				$data_session = array(
 					'id_member' => $row->id_member,
+
 					'username_member' => $username,
 					'nama_member' => ucwords($row->firstname . " " . $row->lastname),
+					'email_member' => $row->email,
+					'no_telp_member' => $row->no_telp,
+					'img_profile_member' => $row->img,
 					'status_login' => "login_member"
+
+					'username' => $username,
+					'nama' => ucwords($row->firstname . " " . $row->lastname),
+					'status' => "login_member"
+
 					);
 
 				$this->session->set_userdata($data_session);
 
+
+				redirect(base_url('member'.$redirect_url));
+
 				redirect(base_url($redirect_url));
+
 				// header("Location: base_url('calendar')");
 			}else{
 				$this->session->set_flashdata('error-msg','Login gagal! Username dan password salah !!!');

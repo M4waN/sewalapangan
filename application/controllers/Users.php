@@ -6,10 +6,47 @@ class Users extends CI_Controller {
 	public function __construct(){
 			parent::__construct();
 			$this->load->model('Members_model');
+<<<<<<< HEAD
+			$this->load->model('Model_lapangan');
+			$this->load->model('Pemesanan_model');
+=======
+>>>>>>> 69a367e4a8a7b8755ff313cf6f7e1d72b98ca32e
 			$this->load->helper('url');
+			$this->load->library(array('form_validation', 'session', 'helptool'));
+			$this->load->helper(array('url', 'language'));
 			// $this->load->helper ('form');
-			$this->load->library(array('form_validation', 'session'));
+			// $this->load->library(array('form_validation', 'session'));
 		}
+
+	// public function index()
+	// {
+	// 	// $this
+	// }
+
+	function index()
+	{
+		$data = [
+			'getdata_lapangan' => $this->Model_lapangan->ambil_data()->result(),
+			'getdata_pemesanan' => $this->Pemesanan_model->getData(),
+			// 'getdata_jenislapangan' => $this->model_lapangan->getid_jenislapangan()->result(),
+			'pagename' => 'Data Lapangan'
+		];
+		$this->load->view('index/head');
+
+		// $this->load->view('indextemplate/02_header');
+		$this->load->view('indextemplate/navbar');
+		$this->load->view('pages/users/login_form');
+		// $this->load->view('pages/jadwal/jadwal');
+		$this->load->view('pages/jadwal/column-grouping', $data);
+		$this->load->view('index/footer');
+
+		$this->load->view('index/foot');
+
+		// $this->load->view('pages/jadwal/fcalendarscript');
+    // $this->load->view('pages/jadwal/home');
+
+	}
+
 
 
 

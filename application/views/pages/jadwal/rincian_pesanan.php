@@ -1,102 +1,46 @@
-<p/>
-<style media="screen">
 
-.center{
-  margin: auto;
-  width: 70%;
-  padding: 20px;
-}
+<?php $id_transaksi = $this->session->userdata('id_transaksi');
+ if($id_transaksi == '') {?>
+<div class="col-md-7" style="padding-top: 60px;">
 
-.panel{
-  font-family: 'Montserrat',sans-serif;
+  <div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-bank"></i> Pembayaran</div>
+    <div class="panel-body textcenter"  style="min-height: 100px; ">
+      Tidak ada transaksi pembayaran saat ini
 
-}
-.panel > .panel-heading{
-  font-weight: 600;
-}
-.textcenter{
-  text-align: center;
-}
-
-.card{
-
-  padding: 5px 15px 10px 15px;
-
-  font-size: 1.4em;
-}
-.card-grey{
-  background-color: #EEEEEE;
-}
-
-.alert{
-  margin-bottom: 5px;
-}
-
-.panel-body {
-  padding-bottom:0;
-}
-hr{
-  border-color: #E0E0E0;
-  background-color: #E0E0E0;
-}
-.angka{
-  text-align: right;
-}
-
-img{
-  /* width: 100px; */
-}
-.bank-collapse{
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.img-bank-mandiri{
-  width: 100px;
-  margin-top: -16px;
-  /* height: 10px; */
-  margin-right: 15px;
-}
-
-.img-bank{
-    width: 100px;
-    margin-right: 15px;
-}
-.id-bank{
-  color: grey;
-  font-size: 1em;
-}
-b{
-  color: black;
-}
-.sticky{
-  position: -webkit-sticky;
-  position: sticky;
-}
-
-
-</style>
-
-<div class="row center">
-
-  <div class="col-md-3">
-    <ul class="nav nav-pills nav-stacked sticky">
-      <li ><a href="#">Dashboard</a></li>
-      <li><a href="#">Profil</a></li>
-      <li><a href="#">Log Transaksi</a></li>
-      <li><a href="pembayaran">Pembayaran</a></li>
-    </ul>
+    </div>
   </div>
 
-  <div class="col-md-7">
-    <div class="alert alert-success" role="alert">
+</div>
+
+<?php  }else{ ?>
+
+
+
+  <div class="col-md-7" style="padding-top: 60px;">
+    <?php $msg = $this->session->flashdata('success');
+    if($msg != '' )  { ?>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<?php echo $this->session->flashdata('success'); ?>
+      </div>
+    <?php }
+  if($this->session->flashdata('failed_msg') != '' )  { ?>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<?php echo $this->session->flashdata('failed_msg'); ?>
+      </div>
+    <?php } ?>
+
+    <div class="alert alert-warning" role="alert">
       <p class="textcenter">Selesaikan pembayaran dalam <b>02:59:40</b> </p>
     </div>
     <div class="panel panel-default">
 
-      <div class="panel-heading textcenter">Rincian Pembayaran </div>
+      <div class="panel-heading"><i class="fa fa-bank"></i> Rincian Pembayaran </div>
+
       <div class="alert alert-default">
-        No. Pesanan : 072034728
+        No. Pesanan : <?php echo $id_transaksi ?>
       </div>
 
 
@@ -186,12 +130,14 @@ b{
 </div>
 
           </div>
-
+          <?php foreach($getDatabyId as $data){ ?>
           <div class="card">
             <p><b>Jadwal Sewa Lapangan</b></p>
-            <p>Lapangan A Rumput INDOOR - FUTSAL</p>
-            <p>Senin, 6/25/2018</p>
-            <p>08:00 am - 09:00 am</p>
+            <p><?php echo $data->nama_lapangan." - ". $data->nama_jenis_lapangan ?></p>
+            <p><?php
+            // $day = array('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu');
+             $waktu_mulai = date( 'l, M-d-Y ', strtotime($data->waktu_mulai)); echo $waktu_mulai ?></p>
+            <p><?php echo date('H:i a', strtotime($data->waktu_mulai)) . " - " . date('H:i a', strtotime($data->waktu_selesai)); ?> </p>
           </div>
         </div>
         <div class="row">
@@ -203,7 +149,7 @@ b{
                 :
               </div> -->
               <div class="col-md-7 angka">
-              2 Jam
+              <?php echo $jam = $data->duration_time / 60; ?> Jam
               </div>
 
             </div>
@@ -215,7 +161,7 @@ b{
                 :
               </div> -->
               <div class="col-md-7 angka">
-                Rp 100.000
+                <?php echo $this->helptool->rupiah($data->harga_lapangan) ?>
               </div>
 
             </div>
@@ -231,7 +177,7 @@ b{
               </div> -->
               <div class="col-md-7 angka">
                 <hr>
-                Rp 200.000
+                <?php echo $this->helptool->rupiah($data->total_tarif) ?>
               </div>
 
 
@@ -239,6 +185,7 @@ b{
 
           </div>
 
+        <?php } ?>
 
         </div>
       </div>
@@ -258,44 +205,34 @@ b{
 
 
   </div>
-
-</div>
-
+<?php } ?>
+<!-- end of div -->
 <!-- Modal -->
 <div class="modal fade" id="modalConfirmBayar" tabindex="-1" role="dialog" aria-labelledby="modalConfirmBayarLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <form class="" action="<?php echo base_url('member/add_bukti') ?>" method="post" enctype="multipart/form-data">
         <h4 class="modal-title" id="modalConfirmBayarLabel">Konfirmasi Pembayaran</h4>
       </div>
       <div class="modal-body">
+
+
+
         Upload Bukti Transaksi :
-        <input type="multitype/enctype" name="" value="">
+        <input type="hidden" name="xjudul" value="bukti_pembayaran_" >
+        <input type="file" name="filefoto" id="imgInp">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <input type="submit" class="btn btn-primary" value="Save changes"/>
+        <!-- <img id="img-upload"> -->
       </div>
+      </form>
     </div>
   </div>
 </div>
 
-<script type="text/javascript">
-
-$(document).ready(function() {
-	// get current URL path and assign 'active' class
-	var pathname = window.location.pathname;
-	$('li > a[href="'+pathname+'"]').parent().addClass('active');
-})
-
-// $(function() {
-//    $("li").click(function() {
-//       // remove classes from all
-//       $("li").removeClass("active");
-//       // add class to the one we clicked
-//       $(this).addClass("active");
-//    });
-// });
-
-</script>
+</div>
+<!-- end of div -->

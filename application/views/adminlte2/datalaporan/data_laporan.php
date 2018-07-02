@@ -87,7 +87,7 @@
       echo $sisa_bayar; ?>
     </td>
       <td><?php echo $u->status; ?></td>
-      <td>  <a    href="javascript:;"
+      <!-- <td>  <a    href="javascript:;"
             data-id_lapangan="<?php echo $u->id_booking ?>"
 
             data-toggle="modal" data-target="#hapus-data">
@@ -99,7 +99,7 @@
                     data-nama_lapangan="<?php echo $u->firstname ?>"
                     data-jenis_lapangan="<?php echo $u->lastname ?>"
                     data-harga_lapangan="<?php echo $u->nama_lapangan ?>"
-                    data-harga_lapangan="<?php echo $u->jenis_lapangan ?>"
+
                     data-harga_lapangan="<?php echo $u->duration_time ?>"
                     data-harga_lapangan="<?php echo $u->waktu_mulai ?>"
                     data-harga_lapangan="<?php echo $u->status ?>"
@@ -108,7 +108,7 @@
                     data-toggle="modal" data-target="#edit-data">
                     <button  data-toggle="modal" data-target="#ubah-data" class="btn btn-info">Ubah</button>
                       </a>
-      </td>
+      </td> -->
       <!-- <td></td> -->
     </tr>
     <?php } ?>
