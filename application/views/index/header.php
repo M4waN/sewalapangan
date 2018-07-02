@@ -41,18 +41,15 @@
           </ul>
         </li>
         <li><a href="#contact">Contact</a></li>
-<!-- <<<<<<< HEAD -->
+
         <li><?php if($this->session->userdata('status_login') === 'login_member'): ?>
           <a href="<?php echo base_url('member/jadwal'); ?>">Jadwal dan Pesan</a>
         <?php else: ?>
           <a    href="javascript:;"
                 data-redirect_url="/jadwal"
 
-        <li><?php if($this->session->userdata('status') === 'login_member'): ?>
-          <a href="<?php echo base_url('calendar'); ?>">Jadwal dan Pesan</a>
-        <?php else: ?>
-          <a    href="javascript:;"
-                data-redirect_url="calendar"
+
+
 
                 data-toggle="modal" data-target="#loginModal">
               Jadwal dan Pesan
@@ -65,12 +62,6 @@
         <li class="has-dropdown"><a href="member/profile">Hi ! <?php echo $this->session->userdata('nama_member') ?></a>
           <ul class="dropdown">
             <li><a href="<?php echo base_url('member'); ?>"><i class="fa fa-user"></i> Dashboard</a></li>
-
-        <?php if($this->session->userdata('status') === 'login_member'): ?>
-
-        <li class="has-dropdown"><a href="#">Hi ! <?php echo $this->session->userdata('nama') ?></a>
-          <ul class="dropdown">
-            <li><a href="<?php echo base_url(''); ?>"><i class="fa fa-user"></i> Dashboard</a></li>
 
             <li><a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off" ></i> Logout </a></li>
           </ul>
@@ -99,7 +90,7 @@
 
             <a href="<?php echo base_url('member/jadwal'); ?>" class="white-btn">Pesan Sekarang!</a>
 
-            <a href="<?php echo base_url('calendar'); ?>" class="white-btn">Pesan Sekarang!</a>
+
 
 
           </div>

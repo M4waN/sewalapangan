@@ -50,10 +50,7 @@ class Auth extends CI_Controller
   // }else{
   //   return false;
   // }
-
 			// $redirect_url = 'member/profile';
-
-
 
 			$redirect_url = $this->input->post('redirect_url');
 			$username = $this->input->post('username');
@@ -74,11 +71,7 @@ class Auth extends CI_Controller
 					'email_member' => $row->email,
 					'no_telp_member' => $row->no_telp,
 					'img_profile_member' => $row->img,
-					'status_login' => "login_member"
-
-					'username' => $username,
-					'nama' => ucwords($row->firstname . " " . $row->lastname),
-					'status' => "login_member"
+					'status_login' => "login_member",
 
 					);
 
@@ -88,6 +81,7 @@ class Auth extends CI_Controller
 				redirect(base_url('member'.$redirect_url));
 
 				redirect(base_url($redirect_url));
+
 
 				// header("Location: base_url('calendar')");
 			}else{
