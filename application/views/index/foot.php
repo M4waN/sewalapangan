@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="<?php echo base_url('assets/index/') ?>js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/index/') ?>js/jquery.magnific-popup.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/index/') ?>js/main.js"></script>
-<<<<<<< HEAD
+
 	<script type="text/javascript" src="<?php echo base_url('assets/index/') ?>js/currencyFormatter.min.js"></script>
 
 	<script src="<?php echo base_url('assets/adminlte2/'); ?>bower_components/moment/moment.js"></script>
@@ -295,8 +295,6 @@ $(function() { // document ready
 	</script> -->
 
 
-=======
->>>>>>> 69a367e4a8a7b8755ff313cf6f7e1d72b98ca32e
 
 <embed src="m.mp3" autostart="true" loop="false" hidden="true">
 

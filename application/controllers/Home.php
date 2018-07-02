@@ -14,7 +14,7 @@ class Home extends CI_Controller {
 	{
 		// $this->load->view('indextemplate/wrap');
 		$this->load->view('index/head');
-		// $this->load->view('index/header');
+		$this->load->view('index/header');
 
 		$this->load->view('index/about');
 		$this->load->view('index/fitur');
