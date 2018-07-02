@@ -22,8 +22,8 @@ class Model_jadwal extends CI_Model{
 	$this->db->join('data_lapangan', 'data_lapangan.id_lapangan = data_booking.id_lapangan');
 	$this->db->join('jenis_lapangan', 'jenis_lapangan.id_jenis_lapangan = data_lapangan.id_jenis_lapangan');
 	$this->db->join('data_member', 'data_member.id_member = data_booking.id_member');
-	$this->db->where('status', 'lunas');
-	$this->db->or_where('status', 'barudp');
+	// $this->db->where('status', 'lunas');
+	// $this->db->or_where('status', 'barudp');
 	$data = $this->db->get()->result();
 	return $data;
 

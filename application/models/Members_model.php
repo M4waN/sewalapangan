@@ -12,6 +12,11 @@ class Members_model extends CI_Model{
 
 		return $this->db->get('data_member');
 	}
+	public function wheredata($table, $where)
+	{
+		$this->db->select($table);
+		$this->db->where($where);
+	}
 
 	public 	function input_data($data,$table)
 	{

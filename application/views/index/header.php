@@ -42,10 +42,10 @@
         </li>
         <li><a href="#contact">Contact</a></li>
         <li><?php if($this->session->userdata('status_login') === 'login_member'): ?>
-          <a href="<?php echo base_url('calendar'); ?>">Jadwal dan Pesan</a>
+          <a href="<?php echo base_url('member/jadwal'); ?>">Jadwal dan Pesan</a>
         <?php else: ?>
           <a    href="javascript:;"
-                data-redirect_url="calendar"
+                data-redirect_url="/jadwal"
                 data-toggle="modal" data-target="#loginModal">
               Jadwal dan Pesan
                   </a>
@@ -53,9 +53,9 @@
         </li>
         <?php if($this->session->userdata('status_login') === 'login_member'): ?>
 
-        <li class="has-dropdown"><a href="#">Hi ! <?php echo $this->session->userdata('nama_member') ?></a>
+        <li class="has-dropdown"><a href="member/profile">Hi ! <?php echo $this->session->userdata('nama_member') ?></a>
           <ul class="dropdown">
-            <li><a href="<?php echo base_url(''); ?>"><i class="fa fa-user"></i> Dashboard</a></li>
+            <li><a href="<?php echo base_url('member'); ?>"><i class="fa fa-user"></i> Dashboard</a></li>
             <li><a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off" ></i> Logout </a></li>
           </ul>
         </li>
@@ -80,7 +80,7 @@
             <h1 class="white-text">SPORTCENTER</h1>
             <p class="white-text">Morbi mattis felis at nunc. Duis viverra diam non justo. In nisl. Nullam sit amet magna in magna gravida vehicula. Mauris tincidunt sem sed arcu. Nunc posuere.
             </p>
-            <a href="<?php echo base_url('calendar'); ?>" class="white-btn">Pesan Sekarang!</a>
+            <a href="<?php echo base_url('member/jadwal'); ?>" class="white-btn">Pesan Sekarang!</a>
 
           </div>
         </div>
