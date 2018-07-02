@@ -41,21 +41,37 @@
           </ul>
         </li>
         <li><a href="#contact">Contact</a></li>
+<<<<<<< HEAD
         <li><?php if($this->session->userdata('status_login') === 'login_member'): ?>
           <a href="<?php echo base_url('member/jadwal'); ?>">Jadwal dan Pesan</a>
         <?php else: ?>
           <a    href="javascript:;"
                 data-redirect_url="/jadwal"
+=======
+        <li><?php if($this->session->userdata('status') === 'login_member'): ?>
+          <a href="<?php echo base_url('calendar'); ?>">Jadwal dan Pesan</a>
+        <?php else: ?>
+          <a    href="javascript:;"
+                data-redirect_url="calendar"
+>>>>>>> 69a367e4a8a7b8755ff313cf6f7e1d72b98ca32e
                 data-toggle="modal" data-target="#loginModal">
               Jadwal dan Pesan
                   </a>
         <?php  endif;  ?>
         </li>
+<<<<<<< HEAD
         <?php if($this->session->userdata('status_login') === 'login_member'): ?>
 
         <li class="has-dropdown"><a href="member/profile">Hi ! <?php echo $this->session->userdata('nama_member') ?></a>
           <ul class="dropdown">
             <li><a href="<?php echo base_url('member'); ?>"><i class="fa fa-user"></i> Dashboard</a></li>
+=======
+        <?php if($this->session->userdata('status') === 'login_member'): ?>
+
+        <li class="has-dropdown"><a href="#">Hi ! <?php echo $this->session->userdata('nama') ?></a>
+          <ul class="dropdown">
+            <li><a href="<?php echo base_url(''); ?>"><i class="fa fa-user"></i> Dashboard</a></li>
+>>>>>>> 69a367e4a8a7b8755ff313cf6f7e1d72b98ca32e
             <li><a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off" ></i> Logout </a></li>
           </ul>
         </li>
@@ -80,7 +96,11 @@
             <h1 class="white-text">SPORTCENTER</h1>
             <p class="white-text">Morbi mattis felis at nunc. Duis viverra diam non justo. In nisl. Nullam sit amet magna in magna gravida vehicula. Mauris tincidunt sem sed arcu. Nunc posuere.
             </p>
+<<<<<<< HEAD
             <a href="<?php echo base_url('member/jadwal'); ?>" class="white-btn">Pesan Sekarang!</a>
+=======
+            <a href="<?php echo base_url('calendar'); ?>" class="white-btn">Pesan Sekarang!</a>
+>>>>>>> 69a367e4a8a7b8755ff313cf6f7e1d72b98ca32e
 
           </div>
         </div>
