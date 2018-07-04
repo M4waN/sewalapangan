@@ -6,11 +6,9 @@ class Users extends CI_Controller {
 	public function __construct(){
 			parent::__construct();
 			$this->load->model('Members_model');
-<<<<<<< HEAD
+
 			$this->load->model('Model_lapangan');
 			$this->load->model('Pemesanan_model');
-=======
->>>>>>> 69a367e4a8a7b8755ff313cf6f7e1d72b98ca32e
 			$this->load->helper('url');
 			$this->load->library(array('form_validation', 'session', 'helptool'));
 			$this->load->helper(array('url', 'language'));
